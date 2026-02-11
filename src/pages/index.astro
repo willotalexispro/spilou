@@ -1,72 +1,161 @@
 ---
-import { Container, FeatureCard } from '@components/odyssey-theme';
-
+import { Container, Button } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
+import LighthouseScore from '../components/sections/LighthouseScore.astro';
+import ServiceCard from '../components/sections/ServiceCard.astro';
+import ProcessSection from '../components/sections/ProcessSection.astro';
 ---
 
 <Layout>
 	<HomeHeroSection />
+
+	<!-- Preuve de Performance -->
 	<Container>
-		<section class="feature-card__section">
-			<h2>Pages d'atterrissage</h2>
-			<p>
-				Utilisez l'une de nos pages pour lancer votre site web ou
-				votre campagne publicitaire.
-			</p>
-			<div class="feature-card__grid">
-				<FeatureCard href="/landing-pages/landing-1" title="Page 1" imgSrc="/assets/images/home/screenshots/landing-1">
-				</FeatureCard>
-				<FeatureCard href="/landing-pages/landing-2" title="Page 2" imgSrc="/assets/images/home/screenshots/landing-2">
-				</FeatureCard>
+		<section class="lighthouse-section" id="realisations">
+			<div class="section-header">
+				<h2>Des performances qui font la différence</h2>
+				<p>Chaque site que nous livrons atteint le score maximal sur Google Lighthouse. Vitesse, accessibilité et SEO au sommet.</p>
+			</div>
+			<div class="lighthouse-grid">
+				<LighthouseScore label="Performance" score={100} />
+				<LighthouseScore label="Accessibilité" score={100} />
+				<LighthouseScore label="SEO" score={100} />
 			</div>
 		</section>
 	</Container>
 
+	<!-- Grille des Services -->
 	<Container>
-		<section class="feature-card__section">
-			<h2>Pages entreprise</h2>
-			<p>
-				Utilisez nos pages prêtes à l'emploi pour votre page à propos, contact,
-				mentions légales, articles de blog, etc.
-			</p>
-			<div class="feature-card__grid">
-				<FeatureCard href="/company/about" title="À propos" imgSrc="/assets/images/home/screenshots/about">
-				</FeatureCard>
-				<FeatureCard href="/company/contact" title="Contact" imgSrc="/assets/images/home/screenshots/contact">
-				</FeatureCard>
-				<FeatureCard href="/blog/" title="Blog" imgSrc="/assets/images/home/screenshots/blog">
-				</FeatureCard>
-				<FeatureCard
-					href="/blog/posts/remote-work-mental-health"
-					title="Article de blog"
-          imgSrc="/assets/images/home/screenshots/blog-post"
-				>
-				</FeatureCard>
-				<FeatureCard
-					href="/company/legal"
-					imgSrc="/assets/images/home/screenshots/legal"
-					title="Mentions légales"
-				>
-				</FeatureCard>
+		<section class="services-section" id="services">
+			<div class="section-header">
+				<h2>Nos services</h2>
+				<p>Des solutions adaptées à chaque étape de votre présence en ligne.</p>
+			</div>
+			<div class="services-grid">
+				<ServiceCard
+					icon="ic:baseline-web"
+					title="Sites vitrines"
+					description="Un site sur-mesure qui reflète votre image de marque. Design moderne, responsive et optimisé pour convertir vos visiteurs en clients."
+				/>
+				<ServiceCard
+					icon="ic:baseline-refresh"
+					title="Refonte de site"
+					description="Votre site actuel est lent ou daté ? Nous le transformons en une plateforme performante avec un design actuel et un code optimisé."
+				/>
+				<ServiceCard
+					icon="ic:baseline-trending-up"
+					title="Optimisation SEO"
+					description="Améliorez votre visibilité sur Google. Audit technique, optimisation du contenu et stratégie de mots-clés pour attirer plus de clients."
+				/>
 			</div>
 		</section>
 	</Container>
 
+	<!-- Section Processus -->
+	<section class="process-section" id="process">
+		<Container>
+			<div class="section-header">
+				<h2>Notre process</h2>
+				<p>Un accompagnement en 3 étapes pour un site livré dans les règles de l'art.</p>
+			</div>
+			<ProcessSection />
+		</Container>
+	</section>
+
+	<!-- Section Tarifs / CTA -->
+	<Container>
+		<section class="cta-section" id="tarifs">
+			<div class="cta-card">
+				<h2>Prêt à lancer votre projet ?</h2>
+				<p>Discutons de votre projet et obtenez un devis gratuit sous 48h. Pas d'engagement, pas de surprise.</p>
+				<div class="cta-btns">
+					<Button href="/company/contact">Demander un devis gratuit</Button>
+				</div>
+			</div>
+		</section>
+	</Container>
 </Layout>
 
 <style>
-	.feature-card__section {
+	.section-header {
+		text-align: center;
+		max-width: 600px;
+		margin: 0 auto 3rem;
+	}
+	.section-header h2 {
+		margin-bottom: 0.75rem;
+	}
+	.section-header p {
+		opacity: 0.8;
+		line-height: 1.6;
+	}
+
+	/* Lighthouse */
+	.lighthouse-section {
+		margin: var(--section-margin) auto;
+		padding: 3rem 0;
+	}
+	.lighthouse-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--theme-grid-gap);
+		max-width: 600px;
+		margin: 0 auto;
+	}
+	@media (max-width: 600px) {
+		.lighthouse-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+	}
+
+	/* Services */
+	.services-section {
 		margin: var(--section-margin) auto;
 	}
-	.feature-card__grid {
+	.services-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		gap: var(--theme-grid-gap);
 	}
 	@media (max-width: 768px) {
-		.feature-card__grid {
+		.services-grid {
 			grid-template-columns: 1fr;
 		}
+	}
+
+	/* Process */
+	.process-section {
+		margin: var(--section-margin) 0;
+		padding: 3rem 0;
+		background: var(--theme-surface-1);
+	}
+
+	/* CTA */
+	.cta-section {
+		margin: var(--section-margin) auto;
+	}
+	.cta-card {
+		background: var(--theme-surface-2);
+		color: var(--theme-on-surface-2);
+		border-radius: var(--theme-shape-radius);
+		padding: 4rem 2rem;
+		text-align: center;
+	}
+	.cta-card h2 {
+		margin-bottom: 1rem;
+	}
+	.cta-card p {
+		opacity: 0.85;
+		max-width: 500px;
+		margin: 0 auto 2rem;
+		line-height: 1.6;
+	}
+	.cta-btns {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		flex-wrap: wrap;
 	}
 </style>

@@ -23,15 +23,19 @@ export const footerSocials = [
 
 export const footerLists = [
 	{
-		title: 'Pages',
+		title: 'Services',
 		items: [
 			{
-				title: 'Page 1',
-				slug: '/landing-pages/landing-1',
+				title: 'Sites vitrines',
+				slug: '/#services',
 			},
 			{
-				title: 'Page 2',
-				slug: '/landing-pages/landing-2',
+				title: 'Refonte de site',
+				slug: '/#services',
+			},
+			{
+				title: 'Optimisation SEO',
+				slug: '/#services',
 			},
 		],
 	},
@@ -39,16 +43,20 @@ export const footerLists = [
 		title: 'Entreprise',
 		items: [
 			{
-				title: 'À propos',
-				slug: '/company/about',
+				title: 'Notre process',
+				slug: '/#process',
 			},
 			{
-				title: 'Blog',
-				slug: '/blog',
+				title: 'Tarifs',
+				slug: '/#tarifs',
 			},
 			{
 				title: 'Contact',
 				slug: '/company/contact',
+			},
+			{
+				title: 'Blog',
+				slug: '/blog',
 			},
 		],
 	},

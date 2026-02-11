@@ -1,0 +1,65 @@
+---
+const steps = [
+	{
+		number: '01',
+		title: 'Audit & Stratégie',
+		description: 'Nous analysons votre activité, vos objectifs et votre concurrence pour définir la meilleure stratégie digitale.',
+	},
+	{
+		number: '02',
+		title: 'Design & Développement',
+		description: 'Nous concevons un design sur-mesure et développons votre site avec les technologies les plus performantes.',
+	},
+	{
+		number: '03',
+		title: 'Optimisation & Lancement',
+		description: 'Tests de performance, SEO technique et mise en ligne. Votre site est prêt à convertir vos visiteurs.',
+	},
+];
+---
+
+<div class="process-grid">
+	{steps.map((step) => (
+		<div class="process-step">
+			<div class="process-step__number">{step.number}</div>
+			<h3 class="process-step__title">{step.title}</h3>
+			<p class="process-step__description">{step.description}</p>
+		</div>
+	))}
+</div>
+
+<style>
+	.process-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--theme-grid-gap);
+	}
+	.process-step {
+		text-align: center;
+		padding: 2rem 1.5rem;
+		position: relative;
+	}
+	.process-step__number {
+		font-size: 3rem;
+		font-weight: 800;
+		color: var(--theme-primary);
+		opacity: 0.15;
+		line-height: 1;
+		margin-bottom: 0.5rem;
+	}
+	.process-step__title {
+		font-size: 1.2rem;
+		margin-bottom: 0.75rem;
+	}
+	.process-step__description {
+		opacity: 0.8;
+		line-height: 1.6;
+		margin: 0;
+	}
+	@media (max-width: 768px) {
+		.process-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+	}
+</style>

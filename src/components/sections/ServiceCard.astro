@@ -1,0 +1,45 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+	title: string;
+	description: string;
+	icon: string;
+}
+
+const { title, description, icon } = Astro.props;
+---
+
+<div class="service-card">
+	<div class="service-card__icon">
+		<Icon name={icon} width="40px" height="40px" />
+	</div>
+	<h3 class="service-card__title">{title}</h3>
+	<p class="service-card__description">{description}</p>
+</div>
+
+<style>
+	.service-card {
+		background: var(--theme-surface-1);
+		border-radius: var(--theme-shape-radius);
+		padding: 2rem;
+		transition: transform var(--theme-transition), box-shadow var(--theme-transition);
+	}
+	.service-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	}
+	.service-card__icon {
+		color: var(--theme-primary);
+		margin-bottom: 1rem;
+	}
+	.service-card__title {
+		font-size: 1.25rem;
+		margin-bottom: 0.75rem;
+	}
+	.service-card__description {
+		opacity: 0.8;
+		line-height: 1.6;
+		margin: 0;
+	}
+</style>

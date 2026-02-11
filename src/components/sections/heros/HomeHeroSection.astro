@@ -6,31 +6,30 @@ import { Container, Button } from '@components/odyssey-theme';
 <Container>
 	<section class="hero-section__section">
 		<div class="hero-section__text">
-				<h1>Bienvenue chez Spilou</h1>
-				<p>
-					Un site marketing moderne construit avec <a
-						href="#"
-						>Astro</a
-					>, conçu avec soin pour les startups et entreprises.
-				</p>
-				<div class="hero-btns__container">
-					<Button href="/" customIcon
-						>Commencer
-            <Fragment slot="icon">
-              <Icon name="ic:baseline-chevron-right"/>
-            </Fragment>
-            </Button
-					>
-				</div>
+			<h1>Votre site web, rapide, beau et visible sur Google</h1>
+			<p>
+				Nous concevons des sites web sur-mesure pour les professionnels
+				qui veulent se démarquer. Performance maximale, design soigné et
+				référencement naturel inclus.
+			</p>
+			<div class="hero-btns__container">
+				<Button href="/company/contact" customIcon>
+					Démarrer un projet
+					<Fragment slot="icon">
+						<Icon name="ic:baseline-chevron-right" />
+					</Fragment>
+				</Button>
+				<Button href="/#services" unelevated>Voir nos services</Button>
+			</div>
 		</div>
 		<div class="hero-section__image">
-				<picture>
-					<img
-						src="/assets/images/home/ocean-hero.jpg"
-						alt="Astro Spilou"
-						id="home-hero-image"
-					/>
-				</picture>
+			<picture>
+				<img
+					src="/assets/images/home/ocean-hero.jpg"
+					alt="Création de sites web performants par Spilou"
+					id="home-hero-image"
+				/>
+			</picture>
 		</div>
 	</section>
 </Container>
@@ -46,15 +45,24 @@ import { Container, Button } from '@components/odyssey-theme';
 	}
 	.hero-section__text {
 		justify-self: center;
-		max-width: 25rem;
+		max-width: 28rem;
+	}
+	.hero-section__text h1 {
+		font-size: clamp(1.8rem, 4vw, 2.8rem);
+		line-height: 1.15;
+		margin-bottom: 1rem;
+	}
+	.hero-section__text p {
+		font-size: 1.1rem;
+		opacity: 0.85;
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
 	}
 	.hero-btns__container {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-	}
-	.hero-btns__container {
-		margin-right: 1rem;
+		flex-wrap: wrap;
 	}
 	.hero-section__image {
 		display: flex;

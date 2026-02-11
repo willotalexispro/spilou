@@ -1,0 +1,86 @@
+---
+export interface Props {
+	label: string;
+	score?: number;
+}
+
+const { label, score = 100 } = Astro.props;
+const circumference = 2 * Math.PI * 54;
+const offset = circumference - (score / 100) * circumference;
+---
+
+<div class="lighthouse-score">
+	<svg class="lighthouse-score__svg" viewBox="0 0 120 120">
+		<circle
+			class="lighthouse-score__track"
+			cx="60"
+			cy="60"
+			r="54"
+			fill="none"
+			stroke-width="8"
+		/>
+		<circle
+			class="lighthouse-score__fill"
+			cx="60"
+			cy="60"
+			r="54"
+			fill="none"
+			stroke-width="8"
+			stroke-dasharray={circumference}
+			stroke-dashoffset={offset}
+			stroke-linecap="round"
+		/>
+		<text x="60" y="54" class="lighthouse-score__value" text-anchor="middle" dominant-baseline="middle">
+			{score}
+		</text>
+		<text x="60" y="80" class="lighthouse-score__max" text-anchor="middle" dominant-baseline="middle">
+			/ 100
+		</text>
+	</svg>
+	<span class="lighthouse-score__label">{label}</span>
+</div>
+
+<style>
+	.lighthouse-score {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	.lighthouse-score__svg {
+		width: 140px;
+		height: 140px;
+		transform: rotate(-90deg);
+	}
+	.lighthouse-score__track {
+		stroke: var(--theme-surface-1);
+	}
+	.lighthouse-score__fill {
+		stroke: #0cce6b;
+		animation: lighthouse-fill 1.5s ease-out forwards;
+	}
+	@keyframes lighthouse-fill {
+		from {
+			stroke-dashoffset: 339.292;
+		}
+	}
+	.lighthouse-score__value {
+		font-size: 2rem;
+		font-weight: 700;
+		fill: var(--theme-on-bg);
+		transform: rotate(90deg);
+		transform-origin: 60px 60px;
+	}
+	.lighthouse-score__max {
+		font-size: 0.75rem;
+		fill: var(--theme-on-bg);
+		opacity: 0.6;
+		transform: rotate(90deg);
+		transform-origin: 60px 60px;
+	}
+	.lighthouse-score__label {
+		font-weight: 600;
+		font-size: 1rem;
+		opacity: 0.85;
+	}
+</style>
