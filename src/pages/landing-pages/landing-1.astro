@@ -1,0 +1,138 @@
+---
+import { Icon } from 'astro-icon/components';
+import {
+	AnnouncementBar,
+	Button,
+	CustomerQuoteSection,
+	ThreeColumnTextSection,
+	YouTubeEmbedSection,
+	StickyTextImageSection,
+	CtaCardSection,
+} from '@components/odyssey-theme';
+import Layout from '../../layouts/Page.astro';
+import TextAndImageHero from '../../components/sections/heros/TextAndImageHero.astro';
+
+const seo = {
+	title: 'Page 1 | Spilou',
+	description: 'Page 1 | Spilou',
+};
+---
+
+<AnnouncementBar
+	text="Lisez notre dernier article de blog"
+	href="/blog/posts/remote-work-mental-health/"
+	slot="announcement-bar"
+/>
+<Layout {seo}>
+	<TextAndImageHero reversed>
+		<div slot="text-container">
+			<h1>Ne réinventez pas la roue</h1>
+			<p>Utilisez Spilou pour lancer le site marketing de votre entreprise.</p>
+		</div>
+		<div slot="btns-container">
+			<Button href="/" customIcon
+				>Commencer <Fragment slot="icon">
+					<Icon name="ic:baseline-chevron-right" />
+				</Fragment></Button
+			>
+		</div>
+		<picture slot="image-container">
+			<img
+				src="/assets/images/landing-1/landing-hero-1.jpg"
+				alt="Astro Odyssee"
+				id="home-hero-image"
+			/>
+		</picture>
+	</TextAndImageHero>
+
+	<CustomerQuoteSection
+		quoteText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, vero nobis? Voluptas assumenda, voluptatibus commodi qui ducimus delectus praesentium maiores, impedit iure labore ratione, ea facilis numquam doloremque aperiam aspernatur."
+		customerName="Client satisfait"
+	/>
+
+	<ThreeColumnTextSection>
+		<div slot="column-1-body">
+			<h2>Pourquoi ?</h2>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
+				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
+				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
+				mollitia cumque. Velit.
+			</p>
+		</div>
+		<Button slot="column-1-cta">En savoir plus</Button>
+		<div slot="column-2-body">
+			<h2>Comment ?</h2>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
+				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
+				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
+				mollitia cumque. Velit.
+			</p>
+		</div>
+		<Button slot="column-2-cta" outlined>En savoir plus</Button>
+		<div slot="column-3-body">
+			<h2>Quoi ?</h2>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
+				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
+				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
+				mollitia cumque. Velit.
+			</p>
+		</div>
+		<Button slot="column-3-cta">En savoir plus</Button>
+	</ThreeColumnTextSection>
+
+	<YouTubeEmbedSection url="#" rounded
+	/>
+
+	<StickyTextImageSection>
+		<div slot="text-container">
+			<h2>Fonctionnalités</h2>
+			<h3>SEO</h3>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
+				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
+				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
+				mollitia cumque. Velit.
+			</p>
+			<h3>Responsive</h3>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
+				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
+				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
+				mollitia cumque. Velit.
+			</p>
+			<h3>Personnalisable</h3>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Est dolorem
+				tempore odio! Nemo consectetur ipsa aperiam similique maxime maiores
+				consequatur explicabo ut quibusdam fugiat corporis, dignissimos tenetur,
+				mollitia cumque. Velit.
+			</p>
+		</div>
+		<picture slot="image-container">
+			<img
+				src="/assets/images/landing-1/landing-sticky.jpg"
+				alt="Spilou"
+				loading="lazy"
+			/>
+		</picture>
+	</StickyTextImageSection>
+
+	<CtaCardSection
+		background="var(--theme-surface-2)"
+		color="var(--theme-on-surface-2)"
+	>
+		<h2>Lancez votre site dès aujourd'hui</h2>
+		<p>
+			Il ne faut que quelques clics pour avoir un site moderne
+			pour votre entreprise ou startup.
+		</p>
+		<Button href="/" customIcon
+			>Commencer <Fragment slot="icon">
+				<Icon name="ic:baseline-chevron-right" />
+			</Fragment></Button
+		>
+	</CtaCardSection>
+</Layout>

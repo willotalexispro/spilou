@@ -1,0 +1,30 @@
+---
+import {Icon} from 'astro-icon/components'
+import { Button, FormInput } from '@components/odyssey-theme';
+
+const selectOptions = [
+  "Recherche Google",
+  "Réseaux sociaux",
+  "Email",
+]
+
+---
+
+<form name="Contact Form" method="POST" action="/contact-thank-you" >
+  <FormInput type="text" label="Prénom" name="First Name" placeholder="Jean" />
+  <FormInput type="text" label="Nom" name="Last Name" placeholder="Dupont" />
+  <FormInput type="email" label="Email" name="Email" placeholder="bonjour@exemple.com" />
+  <Button customIcon>Envoyer
+    <Fragment slot="icon">
+      <Icon name="ic:baseline-chevron-right" />
+    </Fragment>
+  </Button>
+</form>
+
+<style>
+  form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+</style>
