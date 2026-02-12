@@ -1,16 +1,16 @@
 :root {
-	/* Theme Colors - Ocean */
-	--theme-primary: #1556ac;
-	--theme-primary-hover: #2569c3;
-	--theme-on-primary: hsl(0, 0%, 100%);
+	/* Theme Colors - Metaballs Harmony */
+	--theme-primary: #6c5ce7;
+	--theme-primary-hover: #7f70f0;
+	--theme-on-primary: #ffffff;
 
 	--theme-bg: #fafafa;
-	--theme-on-bg: #0c0d0d;
+	--theme-on-bg: #1a1a2e;
 
-	--theme-surface-1: #eef1f3;
-	--theme-on-surface-1: #0c0d0d;
+	--theme-surface-1: #f0eef8;
+	--theme-on-surface-1: #1a1a2e;
 
-	--theme-surface-2: #072650;
+	--theme-surface-2: #1a1a2e;
 	--theme-on-surface-2: #ffffff;
 
 	/* Theme Shapes */
@@ -30,8 +30,8 @@
 	--theme-blog-post-header-width: 1200px;
 
 	/* Theme Fonts */
-	--theme-font-family-serif: 'Roboto Serif', Georgia, Cambria, 'Times New Roman',
-		Times, serif;
-	--theme-font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont,
+	--theme-font-family-serif: 'Poppins', -apple-system, BlinkMacSystemFont,
+		sans-serif;
+	--theme-font-family-sans: 'Poppins', -apple-system, BlinkMacSystemFont,
 		sans-serif;
 }

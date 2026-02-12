@@ -15,7 +15,7 @@ const { seo } = Astro.props;
 		<BaseHead {...seo} />
 	</head>
 	<body>
-		<div id="metaballs-bg"></div>
+		<div id="metaballs-bg" data-astro-transition-persist="metaballs"></div>
 		<SkipLink />
     <slot name="announcement-bar" />
 		<slot name="header" />
@@ -44,169 +44,168 @@ const { seo } = Astro.props;
 	}
 </style>
 
-<script>
-	// ============================================================
-	// CONFIGURATION METABALLS
-	// ============================================================
-	const METABALLS_CONFIG = {
-		count: 15,
-		radiusMin: 8,
-		radiusMax: 48,
-		radiusScale: 0.75,
-		speed: 2,
-		backgroundColor: '#fafafa',
-		threshold: 0.99,
-		edgeSharpness: 100.0,
-	};
+<script is:inline>
+	(function() {
+		var METABALLS_CONFIG = {
+			count: 40,
+			radiusMin: 8,
+			radiusMax: 48,
+			radiusScale: 0.75,
+			speed: 2,
+			backgroundColor: '#fafafa',
+			threshold: 0.99,
+			edgeSharpness: 100.0,
+		};
 
-	// ============================================================
-	// CODE METABALLS WebGL
-	// ============================================================
+		var currentAnimationId = null;
 
-	function hexToGLSLVec3(hex: string): string {
-		const r = parseInt(hex.slice(1, 3), 16) / 255;
-		const g = parseInt(hex.slice(3, 5), 16) / 255;
-		const b = parseInt(hex.slice(5, 7), 16) / 255;
-		return 'vec3(' + r.toFixed(3) + ', ' + g.toFixed(3) + ', ' + b.toFixed(3) + ')';
-	}
-
-	function initMetaballs() {
-		const cfg = METABALLS_CONFIG;
-		const container = document.getElementById('metaballs-bg');
-		if (!container) return;
-
-		const canvas = document.createElement('canvas');
-		const width = canvas.width = window.innerWidth;
-		const height = canvas.height = window.innerHeight;
-		container.appendChild(canvas);
-
-		const gl = canvas.getContext('webgl');
-		if (!gl) {
-			console.warn('WebGL non supporté, effet MetaBalls désactivé.');
-			return;
+		function hexToGLSLVec3(hex) {
+			var r = parseInt(hex.slice(1, 3), 16) / 255;
+			var g = parseInt(hex.slice(3, 5), 16) / 255;
+			var b = parseInt(hex.slice(5, 7), 16) / 255;
+			return 'vec3(' + r.toFixed(3) + ', ' + g.toFixed(3) + ', ' + b.toFixed(3) + ')';
 		}
 
-		const metaballs: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
-		for (let i = 0; i < cfg.count; i++) {
-			const radius = Math.random() * (cfg.radiusMax - cfg.radiusMin) + cfg.radiusMin;
-			metaballs.push({
-				x: Math.random() * (width - 2 * radius) + radius,
-				y: Math.random() * (height - 2 * radius) + radius,
-				vx: (Math.random() - 0.5) * cfg.speed,
-				vy: (Math.random() - 0.5) * cfg.speed,
-				r: radius * cfg.radiusScale
-			});
-		}
+		function initMetaballs() {
+			var cfg = METABALLS_CONFIG;
+			var container = document.getElementById('metaballs-bg');
+			if (!container) return;
 
-		const bgColor = hexToGLSLVec3(cfg.backgroundColor);
-
-		const vertexShaderSrc = `
-		attribute vec2 position;
-		void main() {
-			gl_Position = vec4(position, 0.0, 1.0);
-		}
-		`;
-
-		const fragmentShaderSrc = `
-		precision highp float;
-		const float WIDTH = ${width >> 0}.0;
-		const float HEIGHT = ${height >> 0}.0;
-		const float THRESHOLD = ${cfg.threshold.toFixed(4)};
-		const float EDGE_SHARPNESS = ${cfg.edgeSharpness.toFixed(1)};
-		uniform vec3 metaballs[${cfg.count}];
-		void main(){
-			float x = gl_FragCoord.x;
-			float y = gl_FragCoord.y;
-			float sum = 0.0;
-			for (int i = 0; i < ${cfg.count}; i++) {
-				vec3 metaball = metaballs[i];
-				float dx = metaball.x - x;
-				float dy = metaball.y - y;
-				float radius = metaball.z;
-				sum += (radius * radius) / (dx * dx + dy * dy);
+			if (currentAnimationId) {
+				cancelAnimationFrame(currentAnimationId);
+				currentAnimationId = null;
 			}
-			if (sum >= THRESHOLD) {
-				gl_FragColor = vec4(mix(vec3(x / WIDTH, y / HEIGHT, 1.0), ${bgColor}, max(0.0, 1.0 - (sum - THRESHOLD) * EDGE_SHARPNESS)), 1.0);
-				return;
-			}
-			gl_FragColor = vec4(${bgColor}, 1.0);
-		}
-		`;
-
-		function compileShader(shaderSource: string, shaderType: number) {
-			const shader = gl!.createShader(shaderType)!;
-			gl!.shaderSource(shader, shaderSource);
-			gl!.compileShader(shader);
-			if (!gl!.getShaderParameter(shader, gl!.COMPILE_STATUS)) {
-				throw 'Shader compile failed with: ' + gl!.getShaderInfoLog(shader);
-			}
-			return shader;
-		}
-
-		function getAttribLocation(program: WebGLProgram, name: string) {
-			const attributeLocation = gl!.getAttribLocation(program, name);
-			if (attributeLocation === -1) {
-				throw 'Can not find attribute ' + name + '.';
-			}
-			return attributeLocation;
-		}
-
-		const vertexShader = compileShader(vertexShaderSrc, gl.VERTEX_SHADER);
-		const fragmentShader = compileShader(fragmentShaderSrc, gl.FRAGMENT_SHADER);
-
-		const program = gl.createProgram()!;
-		gl.attachShader(program, vertexShader);
-		gl.attachShader(program, fragmentShader);
-		gl.linkProgram(program);
-		gl.useProgram(program);
-
-		const vertexData = new Float32Array([
-			-1.0,  1.0,
-			-1.0, -1.0,
-			 1.0,  1.0,
-			 1.0, -1.0,
-		]);
-		const vertexDataBuffer = gl.createBuffer();
-		gl.bindBuffer(gl.ARRAY_BUFFER, vertexDataBuffer);
-		gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
-
-		const positionHandle = getAttribLocation(program, 'position');
-		gl.enableVertexAttribArray(positionHandle);
-		gl.vertexAttribPointer(positionHandle, 2, gl.FLOAT, false, 2 * 4, 0);
-
-		const metaballsHandle = gl.getUniformLocation(program, 'metaballs');
-
-		let animationId: number;
-		function loop() {
-			for (let i = 0; i < cfg.count; i++) {
-				const mb = metaballs[i];
-				mb.x += mb.vx;
-				mb.y += mb.vy;
-				if (mb.x < mb.r || mb.x > width - mb.r) mb.vx *= -1;
-				if (mb.y < mb.r || mb.y > height - mb.r) mb.vy *= -1;
-			}
-
-			const dataToSendToGPU = new Float32Array(3 * cfg.count);
-			for (let i = 0; i < cfg.count; i++) {
-				const baseIndex = 3 * i;
-				const mb = metaballs[i];
-				dataToSendToGPU[baseIndex + 0] = mb.x;
-				dataToSendToGPU[baseIndex + 1] = mb.y;
-				dataToSendToGPU[baseIndex + 2] = mb.r;
-			}
-			gl!.uniform3fv(metaballsHandle, dataToSendToGPU);
-			gl!.drawArrays(gl!.TRIANGLE_STRIP, 0, 4);
-			animationId = requestAnimationFrame(loop);
-		}
-		loop();
-
-		window.addEventListener('resize', function() {
-			if (animationId) cancelAnimationFrame(animationId);
-			canvas.remove();
 			container.innerHTML = '';
-			initMetaballs();
-		});
-	}
 
-	initMetaballs();
+			var canvas = document.createElement('canvas');
+			var width = canvas.width = window.innerWidth;
+			var height = canvas.height = window.innerHeight;
+			if (width === 0 || height === 0) return;
+			container.appendChild(canvas);
+
+			var gl = canvas.getContext('webgl');
+			if (!gl) return;
+
+			// Full page height for distributing metaballs
+			var pageHeight = Math.max(
+				document.body.scrollHeight,
+				document.documentElement.scrollHeight,
+				height
+			);
+
+			var metaballs = [];
+			for (var i = 0; i < cfg.count; i++) {
+				var radius = Math.random() * (cfg.radiusMax - cfg.radiusMin) + cfg.radiusMin;
+				metaballs.push({
+					x: Math.random() * (width - 2 * radius) + radius,
+					y: Math.random() * (pageHeight - 2 * radius) + radius,
+					vx: (Math.random() - 0.5) * cfg.speed,
+					vy: (Math.random() - 0.5) * cfg.speed,
+					r: radius * cfg.radiusScale
+				});
+			}
+
+			var bgColor = hexToGLSLVec3(cfg.backgroundColor);
+
+			var vertexShaderSrc =
+				'attribute vec2 position;' +
+				'void main() { gl_Position = vec4(position, 0.0, 1.0); }';
+
+			var fragmentShaderSrc =
+				'precision highp float;' +
+				'const float WIDTH = ' + (width >> 0) + '.0;' +
+				'const float HEIGHT = ' + (height >> 0) + '.0;' +
+				'const float THRESHOLD = ' + cfg.threshold.toFixed(4) + ';' +
+				'const float EDGE_SHARPNESS = ' + cfg.edgeSharpness.toFixed(1) + ';' +
+				'uniform vec3 metaballs[' + cfg.count + '];' +
+				'void main(){' +
+				'  float x = gl_FragCoord.x;' +
+				'  float y = gl_FragCoord.y;' +
+				'  float sum = 0.0;' +
+				'  for (int i = 0; i < ' + cfg.count + '; i++) {' +
+				'    vec3 metaball = metaballs[i];' +
+				'    float dx = metaball.x - x;' +
+				'    float dy = metaball.y - y;' +
+				'    float radius = metaball.z;' +
+				'    sum += (radius * radius) / (dx * dx + dy * dy);' +
+				'  }' +
+				'  if (sum >= THRESHOLD) {' +
+				'    gl_FragColor = vec4(mix(vec3(x / WIDTH, y / HEIGHT, 1.0), ' + bgColor + ', max(0.0, 1.0 - (sum - THRESHOLD) * EDGE_SHARPNESS)), 1.0);' +
+				'    return;' +
+				'  }' +
+				'  gl_FragColor = vec4(' + bgColor + ', 1.0);' +
+				'}';
+
+			function compileShader(src, type) {
+				var shader = gl.createShader(type);
+				gl.shaderSource(shader, src);
+				gl.compileShader(shader);
+				if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+					throw 'Shader compile failed: ' + gl.getShaderInfoLog(shader);
+				}
+				return shader;
+			}
+
+			var vertexShader = compileShader(vertexShaderSrc, gl.VERTEX_SHADER);
+			var fragmentShader = compileShader(fragmentShaderSrc, gl.FRAGMENT_SHADER);
+
+			var program = gl.createProgram();
+			gl.attachShader(program, vertexShader);
+			gl.attachShader(program, fragmentShader);
+			gl.linkProgram(program);
+			gl.useProgram(program);
+
+			var vertexData = new Float32Array([-1, 1, -1, -1, 1, 1, 1, -1]);
+			var buf = gl.createBuffer();
+			gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+			gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
+
+			var posLoc = gl.getAttribLocation(program, 'position');
+			gl.enableVertexAttribArray(posLoc);
+			gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+			var metaballsLoc = gl.getUniformLocation(program, 'metaballs');
+
+			function loop() {
+				for (var i = 0; i < cfg.count; i++) {
+					var mb = metaballs[i];
+					mb.x += mb.vx;
+					mb.y += mb.vy;
+					if (mb.x < mb.r || mb.x > width - mb.r) mb.vx *= -1;
+					if (mb.y < mb.r || mb.y > pageHeight - mb.r) mb.vy *= -1;
+				}
+				// Convert from page-space to viewport-space
+				var scrollY = window.scrollY || window.pageYOffset;
+				var data = new Float32Array(3 * cfg.count);
+				for (var i = 0; i < cfg.count; i++) {
+					var idx = 3 * i;
+					data[idx] = metaballs[i].x;
+					data[idx + 1] = metaballs[i].y - scrollY;
+					data[idx + 2] = metaballs[i].r;
+				}
+				gl.uniform3fv(metaballsLoc, data);
+				gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+				currentAnimationId = requestAnimationFrame(loop);
+			}
+			loop();
+		}
+
+		var resizeTimeout;
+		window.addEventListener('resize', function() {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(initMetaballs, 200);
+		});
+
+		// astro:page-load fires on every navigation (View Transitions)
+		// AND on the initial page load, so it covers all cases
+		document.addEventListener('astro:page-load', function() {
+			// With transition-persist, only init if not already running
+			if (!currentAnimationId) {
+				initMetaballs();
+			}
+		});
+
+		// Fallback for initial load
+		initMetaballs();
+	})();
 </script>

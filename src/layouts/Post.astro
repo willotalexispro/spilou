@@ -36,21 +36,27 @@ const seo = {
     </p>
     {featuredImage && <img class="post-layout__img" src={featuredImage} alt={title} />}
   </div>
-  <Container narrow>  
-    <article id="article">
-        <slot></slot>
-    </article>
-  </Container>
+  <article id="article">
+      <slot></slot>
+  </article>
 </Layout>
 
 <style>
   #article {
-    padding-bottom: 3rem;
+    max-width: var(--theme-blog-post-header-width);
+    margin: 0 auto 3rem;
+    padding: 2rem;
+    background: var(--theme-bg);
+    border-radius: var(--theme-shape-radius);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   }
   .post-header__container {
     max-width: var(--theme-blog-post-header-width);
     margin: 1rem auto;
-    padding: var(--container-padding);
+    padding: 2rem;
+    background: var(--theme-bg);
+    border-radius: var(--theme-shape-radius);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   }
   .post-tags__list {
     margin: 1rem auto;
