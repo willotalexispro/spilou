@@ -3,40 +3,79 @@ import { Icon } from 'astro-icon/components'
 const { navData, rightMenu } = Astro.props;
 ---
 
-<script type="module">
-  const bodyElement = document.querySelector('body');
-  const menuButton = document.querySelector('#menuButton')
-  const navHeader = document.querySelector('#odysseyNavHeader');
-  const menuButtonIconHam = document.querySelector('#menuButtonIconHam');
-  const menuButtonIconClose = document.querySelector('#menuButtonIconClose');
-  let scrollPosition = 0;
+<script is:inline>
+  (function() {
+    var scrollPosition = 0;
 
-  menuButton.addEventListener('click', toggleMenu)
+    function closeMenu() {
+      var bodyElement = document.body;
+      var navHeader = document.getElementById('odysseyNavHeader');
+      var menuButton = document.getElementById('menuButton');
+      var menuButtonIconHam = document.getElementById('menuButtonIconHam');
+      var menuButtonIconClose = document.getElementById('menuButtonIconClose');
 
-  function toggleMenu() {
-    menuButtonIconHam.toggleAttribute('hidden');
-    menuButtonIconClose.toggleAttribute('hidden');
-    
-    if (navHeader.hasAttribute('mobile-menu-open', true)) {
-      menuButton.title = "Ouvrir le menu"
-      // unlock scroll position
+      if (!navHeader || !navHeader.hasAttribute('mobile-menu-open')) return;
+
+      navHeader.removeAttribute('mobile-menu-open');
+      menuButton.title = 'Ouvrir le menu';
+      menuButtonIconHam.removeAttribute('hidden');
+      menuButtonIconClose.setAttribute('hidden', '');
       bodyElement.style.removeProperty('overflow');
       bodyElement.style.removeProperty('position');
       bodyElement.style.removeProperty('top');
       bodyElement.style.removeProperty('width');
-      window.scrollTo(0, scrollPosition);
-    } else {
-      menuButton.title = "Fermer le menu"
-      // lock scroll position
-      scrollPosition = window.pageYOffset;
-      bodyElement.style.overflow = 'hidden';
-      bodyElement.style.position = 'fixed';
-      bodyElement.style.top = `-${scrollPosition}px`;
-      bodyElement.style.width = '100%';
     }
-    
-    navHeader.toggleAttribute('mobile-menu-open');
-  }
+
+    function initMobileMenu() {
+      var bodyElement = document.body;
+      var menuButton = document.getElementById('menuButton');
+      var navHeader = document.getElementById('odysseyNavHeader');
+      var menuButtonIconHam = document.getElementById('menuButtonIconHam');
+      var menuButtonIconClose = document.getElementById('menuButtonIconClose');
+
+      if (!menuButton) return;
+
+      // Close menu on page load (View Transitions)
+      closeMenu();
+
+      if (menuButton.dataset.bound) return;
+      menuButton.dataset.bound = 'true';
+
+      menuButton.addEventListener('click', function() {
+        menuButtonIconHam.toggleAttribute('hidden');
+        menuButtonIconClose.toggleAttribute('hidden');
+
+        if (navHeader.hasAttribute('mobile-menu-open')) {
+          menuButton.title = 'Ouvrir le menu';
+          bodyElement.style.removeProperty('overflow');
+          bodyElement.style.removeProperty('position');
+          bodyElement.style.removeProperty('top');
+          bodyElement.style.removeProperty('width');
+          window.scrollTo(0, scrollPosition);
+        } else {
+          menuButton.title = 'Fermer le menu';
+          scrollPosition = window.pageYOffset;
+          bodyElement.style.overflow = 'hidden';
+          bodyElement.style.position = 'fixed';
+          bodyElement.style.top = '-' + scrollPosition + 'px';
+          bodyElement.style.width = '100%';
+        }
+
+        navHeader.toggleAttribute('mobile-menu-open');
+      });
+
+      // Close menu when a nav link is clicked
+      var navLinks = navHeader.querySelectorAll('.header-nav__container a');
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          closeMenu();
+        });
+      });
+    }
+
+    initMobileMenu();
+    document.addEventListener('astro:page-load', initMobileMenu);
+  })();
 </script>  
 
 <header id="odysseyNavHeader" class={`${rightMenu ? "header--right" : ``.trim()}`} transition:persist>
@@ -78,7 +117,6 @@ const { navData, rightMenu } = Astro.props;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 10;
   }
   header.header--right {
     display: grid;
