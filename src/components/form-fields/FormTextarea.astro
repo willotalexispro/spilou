@@ -1,24 +1,42 @@
 ---
 
-const { label, name, placeholder, rows = 4, required} = Astro.props;
+const { label, name, placeholder, rows = 5, required} = Astro.props;
 ---
 
 <div class="form-field__container">
   {label && <label for={name}>{label}</label>}
-  <textarea name={name} placeholder={placeholder} rows={rows} required={required}></textarea>
+  <textarea id={name} name={name} placeholder={placeholder} rows={rows} required={required}></textarea>
 </div>
 
 <style>
-  .form-field__container textarea{
-    --form-field-border-width: 2px;
+  .form-field__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .form-field__container label {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .form-field__container textarea {
     width: 100%;
-    padding: 0.5rem;
-    border: var(--form-field-border-width) solid var(--form-field-border-color, #ccc);
-    color: var(--form-field-input-color, #000000);
-    border-radius: var(--form-field-border-radius, 0.25rem);
-    outline-style: none;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--theme-surface-1);
+    color: var(--theme-on-bg);
+    background: var(--theme-bg);
+    border-radius: calc(var(--theme-shape-radius) / 2);
+    outline: none;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color var(--theme-transition), box-shadow var(--theme-transition);
+  }
+  .form-field__container textarea::placeholder {
+    color: var(--theme-on-bg);
+    opacity: 0.4;
   }
   .form-field__container textarea:focus {
-    border: var(--form-field-border-width) solid var(--form-field-border-focus-color, #000);
+    border-color: var(--theme-primary);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
   }
 </style>

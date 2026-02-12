@@ -2,32 +2,59 @@
 const { label, name, options, required} = Astro.props;
 ---
 
-<style>
-  .form-field__container select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 2px solid var(--form-field-border-color, #ccc);
-    color: var(--form-field-input-color, #000000);
-    border-radius: var(--form-field-border-radius, 0.25rem);
-    outline-style: none;
-    font-size: 1rem;
-    font-family: inherit;
-    /* Fixes gloss effect on select dropdowns in Safari */
-    -webkit-appearance: none;
-  }
-  .form-field__container select:focus {
-    border: 2px solid var(--form-field-border-focus-color, #000);
-  }
-</style>
-
 <div class="form-field__container">
   {label && <label for={name}>{label}</label>}
-  <select name={name} required={required}>
-    <option disabled selected value="">==CHOISIR UNE OPTION==</option>
-    {options?.map((option) => (
-          <option value={option}>{option}</option>
-        ))}
-  </select>
+  <div class="select-wrapper">
+    <select id={name} name={name} required={required}>
+      <option disabled selected value="">Choisir une option</option>
+      {options?.map((option) => (
+        <option value={option}>{option}</option>
+      ))}
+    </select>
+  </div>
 </div>
 
-
+<style>
+  .form-field__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .form-field__container label {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .select-wrapper {
+    position: relative;
+  }
+  .select-wrapper::after {
+    content: '▾';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--theme-primary);
+    pointer-events: none;
+    font-size: 1rem;
+  }
+  .form-field__container select {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 2px solid var(--theme-surface-1);
+    color: var(--theme-on-bg);
+    background: var(--theme-bg);
+    border-radius: calc(var(--theme-shape-radius) / 2);
+    outline: none;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color var(--theme-transition), box-shadow var(--theme-transition);
+  }
+  .form-field__container select:focus {
+    border-color: var(--theme-primary);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+  }
+</style>

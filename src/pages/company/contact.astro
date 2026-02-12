@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import ContactForm from '../../components/forms/ContactForm.astro';
 import Layout from '../../layouts/Page.astro';
 import { Container } from '@components/odyssey-theme';
@@ -13,21 +14,41 @@ const seo = {
 	<Container>
 		<section class="contact-hero__section">
 			<div class="contact-hero__text-section">
-				<h1>Contactez-nous</h1>
+				<h1>Parlons de votre projet</h1>
 				<p>
-					Remplissez le formulaire ci-dessous pour nous contacter.
-					Nous vous répondrons dans les plus brefs délais.
+					Décrivez-nous votre besoin et recevez un devis personnalisé sous 48h.
+					Pas d'engagement, pas de surprise.
 				</p>
-				<div>
-					<p>
-						<em><a href="tel:8008675309">(800) 867-5309</a></em> • <em
-							><a href="mailto:hello@spilou.com">hello@spilou.com</a
-							></em
-						>
-					</p>
+				<div class="contact-info">
+					<a href="mailto:hello@spilou.com" class="contact-info__item">
+						<span class="contact-info__icon">
+							<Icon name="ic:baseline-email" width="22" height="22" />
+						</span>
+						<span>hello@spilou.com</span>
+					</a>
+					<a href="tel:+33600000000" class="contact-info__item">
+						<span class="contact-info__icon">
+							<Icon name="ic:baseline-phone" width="22" height="22" />
+						</span>
+						<span>06 00 00 00 00</span>
+					</a>
+				</div>
+				<div class="contact-reassurance">
+					<div class="reassurance-item">
+						<Icon name="ic:baseline-schedule" width="20" height="20" />
+						<span>Réponse sous 48h</span>
+					</div>
+					<div class="reassurance-item">
+						<Icon name="ic:baseline-lock" width="20" height="20" />
+						<span>Données sécurisées</span>
+					</div>
+					<div class="reassurance-item">
+						<Icon name="ic:baseline-thumb-up" width="20" height="20" />
+						<span>Devis gratuit</span>
+					</div>
 				</div>
 			</div>
-			<div class="col-2__container">
+			<div class="contact-form__container">
 				<ContactForm />
 			</div>
 		</section>
@@ -41,20 +62,80 @@ const seo = {
 		grid-template-columns: 1fr 1fr;
 		min-height: calc(90vh - var(--navbar-height));
 		gap: 3rem;
+		align-items: center;
 	}
 	.contact-hero__text-section {
-		padding: 2rem;
+		padding: 2.5rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		background-color: var(--theme-surface-1);
 		border-radius: var(--theme-shape-radius);
 	}
-	.col-2__container {
+	.contact-hero__text-section h1 {
+		margin-bottom: 0.75rem;
+	}
+	.contact-hero__text-section > p {
+		opacity: 0.8;
+		line-height: 1.6;
+		margin-bottom: 2rem;
+	}
+
+	/* Contact info links */
+	.contact-info {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		gap: 0.75rem;
+		margin-bottom: 2rem;
 	}
+	.contact-info__item {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		text-decoration: none;
+		color: var(--theme-on-surface-1);
+		font-weight: 500;
+		transition: color var(--theme-transition);
+	}
+	.contact-info__item:hover {
+		color: var(--theme-primary);
+	}
+	.contact-info__icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: var(--theme-bg);
+		color: var(--theme-primary);
+		flex-shrink: 0;
+	}
+
+	/* Reassurance badges */
+	.contact-reassurance {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+	.reassurance-item {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.85rem;
+		font-weight: 500;
+		opacity: 0.7;
+		color: var(--theme-on-surface-1);
+	}
+
+	/* Form container */
+	.contact-form__container {
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		padding: 2.5rem;
+	}
+
 	@media (max-width: 768px) {
 		.contact-hero__section {
 			grid-template-columns: 1fr;

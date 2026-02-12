@@ -1,6 +1,6 @@
 ---
 const { headings = [] } = Astro.props;
-const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const filtered = headings.filter((h) => h.depth === 2);
 const show = filtered.length >= 2;
 ---
 
@@ -9,7 +9,7 @@ const show = filtered.length >= 2;
 		<p class="toc__title">Sommaire</p>
 		<ul class="toc__list">
 			{filtered.map((h) => (
-				<li class:list={['toc__item', { 'toc__item--h3': h.depth === 3 }]}>
+				<li class="toc__item">
 					<a href={`#${h.slug}`}>{h.text}</a>
 				</li>
 			))}
@@ -44,8 +44,5 @@ const show = filtered.length >= 2;
 	}
 	.toc__item a:hover {
 		color: var(--theme-primary);
-	}
-	.toc__item--h3 {
-		padding-left: 1.25rem;
 	}
 </style>
