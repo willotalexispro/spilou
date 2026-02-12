@@ -1,23 +1,13 @@
 export const footerSocials = [
   {
-    name: 'Twitter',
-    url: '#',
-    icon: "mdi:twitter",
-  },
-  {
-    name: 'Youtube',
-    url: '#',
-    icon: "mdi:youtube",
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/alexis-willot-seo/',
+    icon: "mdi:linkedin",
   },
   {
     name: 'Github',
-    url: '#',
+    url: 'https://github.com/willotalexispro',
     icon: "mdi:github",
-  },
-  {
-    name: 'Discord',
-    url: '#',
-    icon: "ic:baseline-discord",
   },
 ]
 
@@ -57,6 +47,10 @@ export const footerLists = [
 			{
 				title: 'Blog',
 				slug: '/blog',
+			},
+			{
+				title: 'Mentions légales',
+				slug: '/company/legal',
 			},
 		],
 	},

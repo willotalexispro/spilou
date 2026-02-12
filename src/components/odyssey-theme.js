@@ -10,9 +10,6 @@ export { default as Plug} from './core/Plug.astro';
 // Buttons
 export { default as Button } from './buttons/Button.astro';
 
-// Cards
-export { default as FeatureCard } from './cards/FeatureCard.astro';
-
 // Sections
 export { default as TextSection } from './sections/TextSection.astro';
 export { default as TextCardSection } from './sections/TextCardSection.astro';
