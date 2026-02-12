@@ -1,7 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import settings from '../../config/settings.js';
-import ThemeProvider from '../theme-switcher/ThemeProvider.astro';
 import StructuredData from './StructuredData.astro';
 
 import '../../styles/index.css';
@@ -51,9 +50,6 @@ const { type, publishDate } = Astro.props;
 
 <!-- View Transitions for smooth page navigation -->
 <ViewTransitions />
-
-<!-- For Demonstration of the themes -->
-{settings.enableThemeSwitcher && <ThemeProvider />}
 
 <!-- Structured Data (JSON-LD) -->
 <StructuredData title={title} description={description} image={Astro.props.image} type={type} publishDate={publishDate} />
