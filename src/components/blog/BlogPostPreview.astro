@@ -5,7 +5,7 @@ const tags = post.tags || [];
 
 <li class="blog-post__preview" data-tags={tags.join(',')}>
   <a href={post.href}>
-    <img src={post.featuredImage} />
+    <img src={post.featuredImage} alt={post.title} />
     <div class="blog-post__tags">
       {tags.map((tag) => (
         <span class="blog-post__tag">{tag}</span>
