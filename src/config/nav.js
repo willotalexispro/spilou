@@ -1,5 +1,9 @@
 export const nav = [
 	{
+		title: 'SEO Local',
+		slug: '/seo-local',
+	},
+	{
 		title: 'Tarifs',
 		slug: '/tarifs',
 	},

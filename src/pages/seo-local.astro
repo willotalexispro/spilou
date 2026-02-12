@@ -1,0 +1,501 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Container, Button } from '@components/odyssey-theme';
+import Layout from '../layouts/Page.astro';
+import ServiceCard from '../components/sections/ServiceCard.astro';
+
+const seo = {
+	title: 'SEO Local & Google My Business | Spilou',
+	description: 'Boostez votre visibilité locale sur Google. Optimisation de fiche Google My Business, SEO local et stratégie de référencement pour attirer des clients près de chez vous.',
+	type: 'website' as const,
+};
+---
+
+<Layout {seo}>
+	<!-- Hero -->
+	<Container>
+		<section class="hero-section">
+			<div class="hero-section__text">
+				<span class="hero-badge">SEO Local</span>
+				<h1>Soyez trouvé par vos clients de proximité</h1>
+				<p>
+					Optimisation Google My Business, référencement local et stratégie de visibilité pour attirer les clients qui cherchent vos services près de chez eux.
+				</p>
+				<div class="hero-btns">
+					<Button href="/company/contact" customIcon>
+						Demander un audit gratuit
+						<Fragment slot="icon">
+							<Icon name="ic:baseline-chevron-right" />
+						</Fragment>
+					</Button>
+					<Button href="#services" unelevated>Découvrir nos services</Button>
+				</div>
+			</div>
+			<div class="hero-section__image">
+				<svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-illustration" role="img" aria-label="Illustration SEO local avec carte et repère de géolocalisation">
+					<!-- Background -->
+					<circle cx="250" cy="250" r="200" fill="url(#seo-grad-main)" opacity="0.12" />
+					<circle cx="340" cy="160" r="120" fill="url(#seo-grad-accent)" opacity="0.1" />
+
+					<!-- Map card -->
+					<rect x="90" y="100" width="320" height="260" rx="20" fill="white" stroke="#6c5ce7" stroke-width="2" opacity="0.95" />
+					<!-- Map grid lines -->
+					<line x1="90" y1="180" x2="410" y2="180" stroke="#e0ddf5" stroke-width="1" />
+					<line x1="90" y1="240" x2="410" y2="240" stroke="#e0ddf5" stroke-width="1" />
+					<line x1="90" y1="300" x2="410" y2="300" stroke="#e0ddf5" stroke-width="1" />
+					<line x1="180" y1="100" x2="180" y2="360" stroke="#e0ddf5" stroke-width="1" />
+					<line x1="270" y1="100" x2="270" y2="360" stroke="#e0ddf5" stroke-width="1" />
+					<line x1="350" y1="100" x2="350" y2="360" stroke="#e0ddf5" stroke-width="1" />
+					<!-- Roads -->
+					<path d="M120 200 Q200 190 280 220 Q360 250 390 230" stroke="#6c5ce7" stroke-width="3" fill="none" opacity="0.3" stroke-linecap="round" />
+					<path d="M150 280 Q220 260 300 290 Q360 310 400 300" stroke="#6c5ce7" stroke-width="2" fill="none" opacity="0.2" stroke-linecap="round" />
+
+					<!-- Pin marker -->
+					<g transform="translate(230, 140)">
+						<path d="M20 0 C9 0 0 9 0 20 C0 35 20 55 20 55 C20 55 40 35 40 20 C40 9 31 0 20 0Z" fill="#6c5ce7" />
+						<circle cx="20" cy="20" r="8" fill="white" />
+					</g>
+					<!-- Small pins -->
+					<g transform="translate(320, 200)" opacity="0.5">
+						<path d="M10 0 C4.5 0 0 4.5 0 10 C0 17.5 10 27.5 10 27.5 C10 27.5 20 17.5 20 10 C20 4.5 15.5 0 10 0Z" fill="#8b7eeb" />
+						<circle cx="10" cy="10" r="4" fill="white" />
+					</g>
+					<g transform="translate(140, 250)" opacity="0.4">
+						<path d="M10 0 C4.5 0 0 4.5 0 10 C0 17.5 10 27.5 10 27.5 C10 27.5 20 17.5 20 10 C20 4.5 15.5 0 10 0Z" fill="#8b7eeb" />
+						<circle cx="10" cy="10" r="4" fill="white" />
+					</g>
+
+					<!-- Google stars card -->
+					<g transform="translate(60, 370)" opacity="0.85">
+						<rect width="160" height="56" rx="14" fill="white" stroke="#6c5ce7" stroke-width="1.5" />
+						<text x="14" y="24" font-family="Poppins, sans-serif" font-size="11" font-weight="600" fill="#1a1a2e">Google My Business</text>
+						<g transform="translate(14, 32)">
+							<polygon points="8,0 10,5.5 16,6 11.5,10 13,16 8,13 3,16 4.5,10 0,6 6,5.5" fill="#f9a825" />
+							<polygon points="30,0 32,5.5 38,6 33.5,10 35,16 30,13 25,16 26.5,10 22,6 28,5.5" fill="#f9a825" />
+							<polygon points="52,0 54,5.5 60,6 55.5,10 57,16 52,13 47,16 48.5,10 44,6 50,5.5" fill="#f9a825" />
+							<polygon points="74,0 76,5.5 82,6 77.5,10 79,16 74,13 69,16 70.5,10 66,6 72,5.5" fill="#f9a825" />
+							<polygon points="96,0 98,5.5 104,6 99.5,10 101,16 96,13 91,16 92.5,10 88,6 94,5.5" fill="#f9a825" />
+						</g>
+					</g>
+
+					<!-- Search bar floating -->
+					<g transform="translate(280, 380)" opacity="0.8">
+						<rect width="160" height="44" rx="22" fill="white" stroke="#6c5ce7" stroke-width="1.5" />
+						<circle cx="28" cy="22" r="10" fill="none" stroke="#6c5ce7" stroke-width="2" />
+						<line x1="35" y1="29" x2="40" y2="34" stroke="#6c5ce7" stroke-width="2" stroke-linecap="round" />
+						<rect x="50" y="17" width="80" height="10" rx="5" fill="#e0ddf5" />
+					</g>
+
+					<!-- Floating circles -->
+					<circle cx="70" cy="140" r="12" fill="#8b7eeb" opacity="0.25" />
+					<circle cx="440" cy="260" r="10" fill="#6c5ce7" opacity="0.2" />
+					<circle cx="450" cy="130" r="14" fill="#8b7eeb" opacity="0.15" />
+
+					<defs>
+						<linearGradient id="seo-grad-main" x1="0%" y1="0%" x2="100%" y2="100%">
+							<stop offset="0%" stop-color="#6c5ce7" />
+							<stop offset="100%" stop-color="#8b7eeb" />
+						</linearGradient>
+						<linearGradient id="seo-grad-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+							<stop offset="0%" stop-color="#8b7eeb" />
+							<stop offset="100%" stop-color="#6c5ce7" />
+						</linearGradient>
+					</defs>
+				</svg>
+			</div>
+		</section>
+	</Container>
+
+	<!-- Pourquoi le SEO local -->
+	<section class="why-section">
+		<Container>
+			<div class="section-header">
+				<h2>Pourquoi le SEO local est indispensable</h2>
+				<p>Ne laissez pas le hasard décider de votre place sur le marché.</p>
+			</div>
+			<div class="stats-grid">
+				<div class="stat-card">
+					<span class="stat-card__number">46 %</span>
+					<span class="stat-card__label">des recherches Google sont locales</span>
+				</div>
+				<div class="stat-card">
+					<span class="stat-card__number">76 %</span>
+					<span class="stat-card__label">des recherches locales mènent à une visite en magasin sous 24h</span>
+				</div>
+				<div class="stat-card">
+					<span class="stat-card__number">28 %</span>
+					<span class="stat-card__label">des recherches locales aboutissent à un achat</span>
+				</div>
+			</div>
+		</Container>
+	</section>
+
+	<!-- Services SEO local -->
+	<Container>
+		<section class="services-section" id="services">
+			<div class="section-header">
+				<h2>Nos services SEO local</h2>
+				<p>Un accompagnement complet pour dominer les résultats de recherche dans votre zone.</p>
+			</div>
+			<div class="services-grid">
+				<ServiceCard
+					icon="ic:baseline-place"
+					title="Google My Business"
+					description="Création, optimisation et gestion de votre fiche : catégories, horaires, photos, posts et réponses aux avis pour maximiser votre visibilité dans le pack local."
+				/>
+				<ServiceCard
+					icon="ic:baseline-star"
+					title="Gestion des avis"
+					description="Stratégie de collecte d'avis clients, réponses professionnelles et suivi de votre e-réputation pour renforcer la confiance et améliorer votre classement."
+				/>
+				<ServiceCard
+					icon="ic:baseline-search"
+					title="Optimisation SEO on-page"
+					description="Mots-clés géolocalisés, balises title et meta, schema LocalBusiness, pages ville par ville — tout pour que Google vous associe à votre zone."
+				/>
+				<ServiceCard
+					icon="ic:baseline-link"
+					title="Citations & annuaires"
+					description="Inscription et harmonisation NAP (Nom, Adresse, Téléphone) sur les annuaires locaux et professionnels : Pages Jaunes, Yelp, Apple Maps et plus."
+				/>
+				<ServiceCard
+					icon="ic:baseline-analytics"
+					title="Suivi & reporting"
+					description="Tableau de bord mensuel avec positions locales, trafic organique, appels et itinéraires depuis votre fiche Google. Des données concrètes, pas du jargon."
+				/>
+				<ServiceCard
+					icon="ic:baseline-edit"
+					title="Contenu localisé"
+					description="Rédaction d'articles de blog et de pages optimisées pour vos mots-clés locaux. Un contenu pertinent qui attire les clients de votre secteur."
+				/>
+			</div>
+		</section>
+	</Container>
+
+	<!-- Process -->
+	<section class="process-section">
+		<Container>
+			<div class="section-header">
+				<h2>Comment ça marche</h2>
+				<p>Un processus simple en 4 étapes pour booster votre visibilité locale.</p>
+			</div>
+			<div class="process-grid">
+				<div class="process-step">
+					<span class="process-step__number">1</span>
+					<h3>Audit de votre SEO local</h3>
+					<p>Analyse de votre présence actuelle : fiche Google, positions, avis, concurrence locale et opportunités.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-step__number">2</span>
+					<h3>Optimisation GMB</h3>
+					<p>Configuration complète de votre fiche Google My Business : catégories, attributs, photos, description et posts.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-step__number">3</span>
+					<h3>SEO on-page & citations</h3>
+					<p>Optimisation technique de votre site, création de pages locales et inscription sur les annuaires pertinents.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-step__number">4</span>
+					<h3>Suivi & croissance</h3>
+					<p>Reporting mensuel, ajustements continus et stratégie d'avis pour maintenir et améliorer vos positions.</p>
+				</div>
+			</div>
+		</Container>
+	</section>
+
+	<!-- FAQ -->
+	<Container>
+		<section class="faq-section">
+			<div class="section-header">
+				<h2>Questions fréquentes sur le SEO local</h2>
+				<p>Tout ce que vous devez savoir avant de vous lancer.</p>
+			</div>
+			<div class="faq-list">
+				<details class="faq-item">
+					<summary>Qu'est-ce que le SEO local exactement ?</summary>
+					<p>Le SEO local regroupe les techniques pour apparaître dans les résultats de recherche géolocalisés : le pack local Google Maps, les résultats organiques pour les requêtes « près de moi » et les fiches Google Business Profile. L'objectif est d'attirer les clients qui se trouvent dans votre zone de chalandise.</p>
+				</details>
+				<details class="faq-item">
+					<summary>Combien de temps faut-il pour voir des résultats ?</summary>
+					<p>Les premières améliorations sont visibles dès les 2 à 4 premières semaines après l'optimisation de votre fiche Google. Pour les résultats organiques, comptez 3 à 6 mois selon la concurrence dans votre secteur et votre zone géographique.</p>
+				</details>
+				<details class="faq-item">
+					<summary>Est-ce que Google My Business est vraiment gratuit ?</summary>
+					<p>Oui, la création et la gestion d'une fiche Google Business Profile sont entièrement gratuites. Notre prestation porte sur l'optimisation avancée, la stratégie de contenu et le suivi des performances — pas sur l'outil en lui-même.</p>
+				</details>
+				<details class="faq-item">
+					<summary>Je n'ai pas de local physique, le SEO local est-il utile ?</summary>
+					<p>Absolument. Google permet de définir une zone de service sans adresse physique visible. Un plombier, un coach à domicile ou un consultant peuvent tout à fait apparaître dans les résultats locaux de leur zone d'intervention.</p>
+				</details>
+				<details class="faq-item">
+					<summary>Quelle est la différence avec le SEO classique ?</summary>
+					<p>Le SEO classique vise la visibilité nationale ou internationale. Le SEO local cible une zone géographique précise et s'appuie sur des signaux spécifiques : fiche Google, avis clients, citations NAP et mots-clés géolocalisés. Les deux sont complémentaires.</p>
+				</details>
+			</div>
+		</section>
+	</Container>
+
+	<!-- CTA -->
+	<Container>
+		<section class="cta-section">
+			<div class="cta-card">
+				<h2>Prêt à dominer les résultats locaux ?</h2>
+				<p>Recevez un audit gratuit de votre visibilité locale et découvrez comment attirer plus de clients près de chez vous.</p>
+				<div class="cta-btns">
+					<Button href="/company/contact">Demander un audit gratuit</Button>
+				</div>
+			</div>
+		</section>
+	</Container>
+</Layout>
+
+<style>
+	.section-header {
+		text-align: center;
+		max-width: 600px;
+		margin: 0 auto 3rem;
+	}
+	.section-header h2 {
+		margin-bottom: 0.75rem;
+	}
+	.section-header p {
+		opacity: 0.8;
+		line-height: 1.6;
+	}
+
+	/* Hero */
+	.hero-section {
+		margin: var(--section-margin) auto;
+		min-height: clamp(90vh, 100vw, calc(100vh - var(--navbar-height)));
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		gap: 1rem;
+	}
+	.hero-section__text {
+		justify-self: center;
+		max-width: 28rem;
+	}
+	.hero-badge {
+		display: inline-block;
+		font-size: 0.8rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		padding: 0.3rem 0.9rem;
+		border-radius: var(--theme-button-border-radius);
+		background: var(--theme-surface-1);
+		color: var(--theme-primary);
+		margin-bottom: 1rem;
+	}
+	.hero-section__text h1 {
+		font-size: clamp(1.8rem, 4vw, 2.8rem);
+		line-height: 1.15;
+		margin-bottom: 1rem;
+	}
+	.hero-section__text p {
+		font-size: 1.1rem;
+		opacity: 0.85;
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+	}
+	.hero-btns {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+	.hero-section__image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.hero-illustration {
+		width: 100%;
+		max-width: 500px;
+		height: auto;
+	}
+	@media (max-width: 768px) {
+		.hero-section {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Why section / Stats */
+	.why-section {
+		margin: var(--section-margin) 0;
+		padding: 3rem 0;
+		background: var(--theme-surface-1);
+	}
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--theme-grid-gap);
+		max-width: 900px;
+		margin: 0 auto;
+	}
+	.stat-card {
+		text-align: center;
+		padding: 2rem 1rem;
+	}
+	.stat-card__number {
+		display: block;
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: var(--theme-primary);
+		margin-bottom: 0.5rem;
+	}
+	.stat-card__label {
+		font-size: 0.95rem;
+		opacity: 0.8;
+		line-height: 1.5;
+	}
+	@media (max-width: 600px) {
+		.stats-grid {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+	}
+
+	/* Services */
+	.services-section {
+		margin: var(--section-margin) auto;
+	}
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--theme-grid-gap);
+	}
+	@media (max-width: 768px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* Process */
+	.process-section {
+		margin: var(--section-margin) 0;
+		padding: 3rem 0;
+		background: var(--theme-surface-1);
+	}
+	.process-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--theme-grid-gap);
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+	.process-step {
+		text-align: center;
+		padding: 1.5rem 1rem;
+	}
+	.process-step__number {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		background: var(--theme-primary);
+		color: var(--theme-on-primary);
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+	.process-step h3 {
+		font-size: 1.1rem;
+		margin-bottom: 0.5rem;
+	}
+	.process-step p {
+		font-size: 0.9rem;
+		opacity: 0.8;
+		line-height: 1.6;
+		margin: 0;
+	}
+	@media (max-width: 768px) {
+		.process-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 480px) {
+		.process-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* FAQ */
+	.faq-section {
+		margin: var(--section-margin) auto;
+		max-width: 800px;
+	}
+	.faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.faq-item {
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		overflow: hidden;
+	}
+	.faq-item summary {
+		padding: 1.25rem 1.5rem;
+		font-weight: 600;
+		cursor: pointer;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+	.faq-item summary::after {
+		content: '+';
+		font-size: 1.4rem;
+		font-weight: 300;
+		color: var(--theme-primary);
+		flex-shrink: 0;
+		transition: transform 0.2s ease;
+	}
+	.faq-item[open] summary::after {
+		content: '\2212';
+	}
+	.faq-item p {
+		padding: 0 1.5rem 1.25rem;
+		margin: 0;
+		opacity: 0.8;
+		line-height: 1.7;
+		font-size: 0.95rem;
+	}
+
+	/* CTA */
+	.cta-section {
+		margin: var(--section-margin) auto;
+	}
+	.cta-card {
+		background: var(--theme-surface-2);
+		color: var(--theme-on-surface-2);
+		border-radius: var(--theme-shape-radius);
+		padding: 4rem 2rem;
+		text-align: center;
+	}
+	.cta-card h2 {
+		margin-bottom: 1rem;
+	}
+	.cta-card p {
+		opacity: 0.85;
+		max-width: 500px;
+		margin: 0 auto 2rem;
+		line-height: 1.6;
+	}
+	.cta-btns {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+</style>
