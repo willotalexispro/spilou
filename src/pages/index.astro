@@ -63,6 +63,38 @@ import ProcessSection from '../components/sections/ProcessSection.astro';
 		</Container>
 	</section>
 
+	<!-- FAQ -->
+	<Container>
+		<section class="faq-section">
+			<div class="section-header">
+				<h2>Pourquoi choisir Spilou ?</h2>
+				<p>Les réponses aux questions que vous vous posez avant de lancer votre projet.</p>
+			</div>
+			<div class="faq-list">
+				<details class="faq-item">
+					<summary>Pourquoi choisir Spilou pour créer votre site internet ?</summary>
+					<p>Un site bien conçu doit incarner votre identité de marque, répondre aux attentes de vos utilisateurs et être pensé pour le référencement naturel dès les premières lignes de code. Chez Spilou, chaque projet est le fruit d'une réflexion stratégique mêlant design, technique et visibilité : arborescence optimisée, UX/UI sur mesure, responsive design, SEO intégré et performance maximale.</p>
+				</details>
+				<details class="faq-item">
+					<summary>Pourquoi Astro et pas WordPress ?</summary>
+					<p>Astro génère des sites statiques ultra-rapides, sans base de données ni plugins qui cassent. Le résultat : un score Lighthouse de 100/100, une sécurité renforcée (aucune faille PHP/SQL), zéro maintenance serveur et un temps de chargement inférieur à une seconde. Votre site est plus rapide, plus sûr et mieux référencé que 95% des sites WordPress.</p>
+				</details>
+				<details class="faq-item">
+					<summary>Comment se déroule un projet avec Spilou ?</summary>
+					<p>De la définition de votre besoin à la mise en ligne, nous restons à vos côtés. Audit, stratégie, design UX/UI et développement : tout est réalisé sur mesure. Nous intégrons le SEO dès la conception — choix des mots-clés, structure de contenu, temps de chargement optimisés, compatibilité mobile et gestion technique propre.</p>
+				</details>
+				<details class="faq-item">
+					<summary>Le site m'appartient-il à 100% ?</summary>
+					<p>Oui, totalement. Le code source complet vous est livré sur un dépôt GitHub à votre nom. Vous êtes propriétaire de chaque ligne de code, chaque image et chaque contenu. Aucun abonnement caché, aucun verrouillage — vous êtes libre de faire évoluer votre site comme vous le souhaitez.</p>
+				</details>
+				<details class="faq-item">
+					<summary>Combien coûte l'hébergement ?</summary>
+					<p>Zéro. Votre site est hébergé gratuitement sur Netlify, un service professionnel utilisé par des millions de sites. Pour les sites vitrines et business, c'est 100% gratuit — pas de frais mensuels, pas de surprise. Le déploiement est automatique à chaque modification.</p>
+				</details>
+			</div>
+		</section>
+	</Container>
+
 	<!-- Section Tarifs / CTA -->
 	<Container>
 		<section class="cta-section" id="tarifs">
@@ -130,6 +162,54 @@ import ProcessSection from '../components/sections/ProcessSection.astro';
 		margin: var(--section-margin) 0;
 		padding: 3rem 0;
 		background: var(--theme-surface-1);
+	}
+
+	/* FAQ */
+	.faq-section {
+		margin: var(--section-margin) auto;
+		max-width: 800px;
+	}
+	.faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.faq-item {
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		overflow: hidden;
+	}
+	.faq-item summary {
+		padding: 1.25rem 1.5rem;
+		font-weight: 600;
+		cursor: pointer;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+	.faq-item summary::after {
+		content: '+';
+		font-size: 1.4rem;
+		font-weight: 300;
+		color: var(--theme-primary);
+		flex-shrink: 0;
+		transition: transform 0.2s ease;
+	}
+	.faq-item[open] summary::after {
+		content: '\2212';
+	}
+	.faq-item p {
+		padding: 0 1.5rem 1.25rem;
+		margin: 0;
+		opacity: 0.8;
+		line-height: 1.7;
+		font-size: 0.95rem;
 	}
 
 	/* CTA */
