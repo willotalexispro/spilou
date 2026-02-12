@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Page.astro';
+import { Container, Button } from '@components/odyssey-theme';
+
+const seo = {
+	title: 'Merci ! | Spilou',
+	description: 'Votre message a bien été envoyé.',
+};
+---
+
+<Layout seo={seo}>
+	<Container>
+		<section class="thank-you">
+			<h1>Merci pour votre message !</h1>
+			<p>Nous avons bien reçu votre demande et vous répondrons sous 48h.</p>
+			<Button href="/">Retour à l'accueil</Button>
+		</section>
+	</Container>
+</Layout>
+
+<style>
+	.thank-you {
+		text-align: center;
+		min-height: 60vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+	.thank-you p {
+		opacity: 0.8;
+		max-width: 400px;
+		line-height: 1.6;
+	}
+</style>

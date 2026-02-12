@@ -9,7 +9,8 @@ const selectOptions = [
 
 ---
 
-<form name="Contact Form" method="POST" action="/contact-thank-you">
+<form name="contact" method="POST" netlify action="/contact-thank-you">
+  <input type="hidden" name="form-name" value="contact" />
   <FormInput type="text" label="Nom" name="Name" placeholder="Jean Dupont" />
   <FormInput type="email" label="Email" name="Email" placeholder="bonjour@exemple.com" />
   <FormSelect label="Comment nous avez-vous trouvé ?" options={selectOptions} />
