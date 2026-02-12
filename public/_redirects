@@ -1,0 +1,40 @@
+# Redirections des anciens articles WordPress vers les nouveaux articles Astro
+# Format: /ancien-chemin /nouveau-chemin code-status
+
+/acheter-avis-google/ /blog/posts/acheter-avis-google 301
+/afficher-option-vente-a-emporter/ /blog/posts/afficher-option-vente-a-emporter 301
+/ajouter-des-photos-google-my-business/ /blog/posts/ajouter-des-photos-google-my-business 301
+/ajouter-des-videos-google-my-business/ /blog/posts/ajouter-des-videos-google-my-business 301
+/ajouter-produits-google-my-business/ /blog/posts/ajouter-produits-google-my-business 301
+/ajouter-votre-entreprise-sur-google-my-business/ /blog/posts/ajouter-votre-entreprise-sur-google-my-business 301
+/ameliorer-referencement-google-my-business/ /blog/posts/ameliorer-referencement-google-my-business 301
+/attributs-google-my-business/ /blog/posts/attributs-google-my-business 301
+/augmenter-visibilite-web/ /blog/posts/augmenter-visibilite-web 301
+/avis-google/ /blog/posts/avis-google 301
+/compte-google-my-business/ /blog/posts/compte-google-my-business 301
+/deconnecter-un-compte-google/ /blog/posts/deconnecter-un-compte-google 301
+/demander-avis-google/ /blog/posts/demander-avis-google 301
+/enlever-compte-google-sans-le-supprimer/ /blog/posts/enlever-compte-google-sans-le-supprimer 301
+/erreurs-referencement-local/ /blog/posts/erreurs-referencement-local 301
+/fiche-google-my-business/ /blog/posts/fiche-google-my-business 301
+/fusionner-deux-comptes-google/ /blog/posts/fusionner-deux-comptes-google 301
+/gerer-plusieurs-etablissements-google-my-business/ /blog/posts/gerer-plusieurs-etablissements-google-my-business 301
+/google-my-business-ajouter-categories/ /blog/posts/google-my-business-ajouter-categories 301
+/guide-pour-contacter-google-my-business/ /blog/posts/guide-pour-contacter-google-my-business 301
+/integrez-les-avis-google-sur-mon-site/ /blog/posts/integrez-les-avis-google-sur-mon-site 301
+/modifier-avis-google/ /blog/posts/modifier-avis-google 301
+/modifier-horaires-ouverture-google-my-business/ /blog/posts/modifier-horaires-ouverture-google-my-business 301
+/optimisation-fiche-google-my-business/ /blog/posts/optimisation-fiche-google-my-business 301
+/questions-reponses/ /blog/posts/questions-reponses 301
+/referencement-local-pme/ /blog/posts/referencement-local-pme 301
+/repondre-avis-google/ /blog/posts/repondre-avis-google 301
+/repondre-avis-negatifs/ /blog/posts/repondre-avis-negatifs 301
+/repondre-avis-positifs/ /blog/posts/repondre-avis-positifs 301
+/resoudre-la-suspension-compte-google/ /blog/posts/resoudre-la-suspension-compte-google 301
+/services-fiche-google-my-business/ /blog/posts/services-fiche-google-my-business 301
+/signaler-un-avis-google/ /blog/posts/signaler-un-avis-google 301
+/statistique-recherches-google/ /blog/posts/statistique-recherches-google 301
+/supprimer-avis-google/ /blog/posts/supprimer-avis-google 301
+/supprimer-fiche-etablissement/ /blog/posts/supprimer-fiche-etablissement 301
+/supprimer-photos-fiche-google-my-business/ /blog/posts/supprimer-photos-fiche-google-my-business 301
+/voir-ses-avis-google/ /blog/posts/voir-ses-avis-google 301
