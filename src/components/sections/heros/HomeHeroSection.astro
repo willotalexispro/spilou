@@ -23,13 +23,93 @@ import { Container, Button } from '@components/odyssey-theme';
 			</div>
 		</div>
 		<div class="hero-section__image">
-			<picture>
-				<img
-					src="/assets/images/home/ocean-hero.jpg"
-					alt="Création de sites web performants par Spilou"
-					id="home-hero-image"
-				/>
-			</picture>
+			<svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-illustration" aria-label="Illustration abstraite représentant la création web">
+				<!-- Background blobs -->
+				<circle cx="250" cy="250" r="200" fill="url(#grad-main)" opacity="0.12" />
+				<circle cx="340" cy="160" r="120" fill="url(#grad-accent)" opacity="0.15" />
+				<circle cx="150" cy="350" r="100" fill="url(#grad-main)" opacity="0.1" />
+
+				<!-- Browser window -->
+				<rect x="100" y="120" width="300" height="220" rx="16" fill="white" stroke="#4a6cf7" stroke-width="2" opacity="0.95" />
+				<!-- Title bar -->
+				<rect x="100" y="120" width="300" height="36" rx="16" fill="#4a6cf7" />
+				<rect x="100" y="140" width="300" height="16" fill="#4a6cf7" />
+				<!-- Dots -->
+				<circle cx="122" cy="138" r="5" fill="#fff" opacity="0.6" />
+				<circle cx="138" cy="138" r="5" fill="#fff" opacity="0.6" />
+				<circle cx="154" cy="138" r="5" fill="#fff" opacity="0.6" />
+				<!-- URL bar -->
+				<rect x="174" y="131" width="140" height="14" rx="7" fill="#fff" opacity="0.25" />
+
+				<!-- Content lines -->
+				<rect x="130" y="180" width="160" height="12" rx="6" fill="#4a6cf7" opacity="0.7" />
+				<rect x="130" y="202" width="240" height="8" rx="4" fill="#1a1a2e" opacity="0.15" />
+				<rect x="130" y="218" width="200" height="8" rx="4" fill="#1a1a2e" opacity="0.12" />
+				<rect x="130" y="234" width="220" height="8" rx="4" fill="#1a1a2e" opacity="0.1" />
+
+				<!-- CTA button -->
+				<rect x="130" y="260" width="100" height="30" rx="15" fill="url(#grad-btn)" />
+				<text x="180" y="280" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="Poppins, sans-serif">Go</text>
+
+				<!-- Image placeholder -->
+				<rect x="252" y="176" width="120" height="80" rx="10" fill="url(#grad-accent)" opacity="0.3" />
+				<circle cx="312" cy="206" r="16" fill="#8ba4fb" opacity="0.5" />
+				<polygon points="270,246 300,210 330,236 350,220 372,246" fill="#4a6cf7" opacity="0.25" />
+
+				<!-- Floating elements -->
+				<!-- Code bracket -->
+				<g transform="translate(60, 200)" opacity="0.8">
+					<rect width="56" height="56" rx="14" fill="white" stroke="#4a6cf7" stroke-width="1.5" />
+					<text x="28" y="36" text-anchor="middle" fill="#4a6cf7" font-size="22" font-weight="700" font-family="monospace">&lt;/&gt;</text>
+				</g>
+
+				<!-- Speed gauge -->
+				<g transform="translate(390, 100)" opacity="0.8">
+					<rect width="56" height="56" rx="14" fill="white" stroke="#8ba4fb" stroke-width="1.5" />
+					<path d="M28 42 A16 16 0 1 1 44 26" fill="none" stroke="#4a6cf7" stroke-width="3" stroke-linecap="round" />
+					<line x1="28" y1="26" x2="36" y2="20" stroke="#5b7ef9" stroke-width="2.5" stroke-linecap="round" />
+					<circle cx="28" cy="26" r="2.5" fill="#4a6cf7" />
+				</g>
+
+				<!-- SEO chart -->
+				<g transform="translate(380, 280)" opacity="0.8">
+					<rect width="56" height="56" rx="14" fill="white" stroke="#8ba4fb" stroke-width="1.5" />
+					<rect x="14" y="30" width="7" height="14" rx="2" fill="#8ba4fb" />
+					<rect x="24" y="22" width="7" height="22" rx="2" fill="#5b7ef9" />
+					<rect x="34" y="16" width="7" height="28" rx="2" fill="#4a6cf7" />
+				</g>
+
+				<!-- Floating metaballs / circles -->
+				<circle cx="80" cy="130" r="14" fill="#8ba4fb" opacity="0.3" />
+				<circle cx="430" cy="230" r="10" fill="#4a6cf7" opacity="0.25" />
+				<circle cx="70" cy="380" r="18" fill="#5b7ef9" opacity="0.2" />
+				<circle cx="420" cy="400" r="12" fill="#8ba4fb" opacity="0.2" />
+				<circle cx="200" cy="390" r="8" fill="#4a6cf7" opacity="0.15" />
+				<circle cx="350" cy="60" r="10" fill="#5b7ef9" opacity="0.2" />
+
+				<!-- Sparkles -->
+				<g fill="#4a6cf7" opacity="0.5">
+					<path d="M440 170 l3 -8 3 8 -8 -3 8 -3z" />
+					<path d="M90 310 l2 -6 2 6 -6 -2 6 -2z" />
+					<path d="M320 380 l2 -6 2 6 -6 -2 6 -2z" />
+				</g>
+
+				<!-- Gradients -->
+				<defs>
+					<linearGradient id="grad-main" x1="0%" y1="0%" x2="100%" y2="100%">
+						<stop offset="0%" stop-color="#4a6cf7" />
+						<stop offset="100%" stop-color="#8ba4fb" />
+					</linearGradient>
+					<linearGradient id="grad-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+						<stop offset="0%" stop-color="#5b7ef9" />
+						<stop offset="100%" stop-color="#4a6cf7" />
+					</linearGradient>
+					<linearGradient id="grad-btn" x1="0%" y1="0%" x2="100%" y2="0%">
+						<stop offset="0%" stop-color="#4a6cf7" />
+						<stop offset="100%" stop-color="#5b7ef9" />
+					</linearGradient>
+				</defs>
+			</svg>
 		</div>
 	</section>
 </Container>
@@ -66,13 +146,13 @@ import { Container, Button } from '@components/odyssey-theme';
 	}
 	.hero-section__image {
 		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
-	.hero-section__image img {
+	.hero-illustration {
 		width: 100%;
-		height: 100%;
-		max-height: 80vh;
-		object-fit: cover;
-		border-radius: var(--theme-shape-radius);
+		max-width: 500px;
+		height: auto;
 	}
 	@media (max-width: 768px) {
 		.hero-section__section {

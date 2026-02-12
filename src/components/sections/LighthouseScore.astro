@@ -9,7 +9,7 @@ const circumference = 2 * Math.PI * 54;
 const offset = circumference - (score / 100) * circumference;
 ---
 
-<div class="lighthouse-score">
+<div class="lighthouse-score" data-lighthouse>
 	<svg class="lighthouse-score__svg" viewBox="0 0 120 120">
 		<circle
 			class="lighthouse-score__track"
@@ -27,8 +27,9 @@ const offset = circumference - (score / 100) * circumference;
 			fill="none"
 			stroke-width="8"
 			stroke-dasharray={circumference}
-			stroke-dashoffset={offset}
+			stroke-dashoffset={circumference}
 			stroke-linecap="round"
+			data-target-offset={offset}
 		/>
 		<text x="60" y="54" class="lighthouse-score__value" text-anchor="middle" dominant-baseline="middle">
 			{score}
@@ -57,12 +58,7 @@ const offset = circumference - (score / 100) * circumference;
 	}
 	.lighthouse-score__fill {
 		stroke: #0cce6b;
-		animation: lighthouse-fill 1.5s ease-out forwards;
-	}
-	@keyframes lighthouse-fill {
-		from {
-			stroke-dashoffset: 339.292;
-		}
+		transition: stroke-dashoffset 1.5s ease-out;
 	}
 	.lighthouse-score__value {
 		font-size: 2rem;
@@ -84,3 +80,37 @@ const offset = circumference - (score / 100) * circumference;
 		opacity: 0.85;
 	}
 </style>
+
+<script is:inline>
+(function() {
+	if (window.__lighthouseObserverInit) return;
+	window.__lighthouseObserverInit = true;
+
+	function setupObserver() {
+		var items = document.querySelectorAll('[data-lighthouse]');
+		if (!items.length) return;
+
+		var observer = new IntersectionObserver(function(entries) {
+			entries.forEach(function(entry) {
+				if (entry.isIntersecting) {
+					var fill = entry.target.querySelector('.lighthouse-score__fill');
+					if (fill) {
+						var target = fill.getAttribute('data-target-offset') || '0';
+						fill.style.strokeDashoffset = target;
+					}
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.3 });
+
+		items.forEach(function(item) { observer.observe(item); });
+	}
+
+	setupObserver();
+	document.addEventListener('astro:page-load', function() {
+		window.__lighthouseObserverInit = false;
+		setupObserver();
+		window.__lighthouseObserverInit = true;
+	});
+})();
+</script>

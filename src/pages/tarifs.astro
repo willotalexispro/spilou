@@ -1,0 +1,488 @@
+---
+import { Container, Button } from '@components/odyssey-theme';
+import Layout from '../layouts/Page.astro';
+
+const seo = {
+	title: 'Tarifs | Spilou — Création de sites web performants',
+	description: 'Des tarifs clairs et transparents pour votre site web. Pack Vitrine, Business ou Sur-Mesure. Hébergement gratuit inclus.',
+};
+
+const plans = [
+	{
+		name: 'Pack Vitrine',
+		target: 'TPE, Artisans, Indépendants',
+		price: '990',
+		featured: false,
+		cta: 'Choisir ce pack',
+		features: [
+			'Site One-page',
+			'SEO local optimisé',
+			'Formulaire de contact',
+			'Score 100% Performance',
+			'Design responsive',
+			'Hébergement Netlify inclus',
+		],
+	},
+	{
+		name: 'Pack Business',
+		target: 'PME, Professions libérales',
+		price: '1 890',
+		featured: true,
+		badge: 'Populaire',
+		cta: 'Choisir ce pack',
+		features: [
+			"Jusqu'à 10 pages",
+			'Blog / Actualités (Markdown)',
+			'Optimisation conversion',
+			'Score 100% Performance',
+			'Design responsive',
+			'Hébergement Netlify inclus',
+		],
+	},
+	{
+		name: 'Pack Sur-Mesure',
+		target: 'Startups, Projets complexes',
+		price: null,
+		featured: false,
+		cta: 'Demander un devis',
+		features: [
+			'Design exclusif',
+			'Intégration API',
+			'Fonctionnalités avancées',
+			'Support prioritaire',
+			'Architecture sur-mesure',
+			'Hébergement Netlify inclus',
+		],
+	},
+];
+
+const comparison = [
+	{ label: 'Hébergement Netlify', vitrine: true, business: true, surmesure: true },
+	{ label: 'Certificat SSL (HTTPS)', vitrine: true, business: true, surmesure: true },
+	{ label: 'Optimisation mobile', vitrine: true, business: true, surmesure: true },
+	{ label: 'SEO technique', vitrine: true, business: true, surmesure: true },
+	{ label: 'Statistiques de visite', vitrine: false, business: true, surmesure: true },
+	{ label: 'Blog / Actualités', vitrine: false, business: true, surmesure: true },
+	{ label: 'Pages multiples', vitrine: false, business: true, surmesure: true },
+	{ label: 'Intégration API', vitrine: false, business: false, surmesure: true },
+	{ label: 'Design exclusif', vitrine: false, business: false, surmesure: true },
+	{ label: 'Support prioritaire', vitrine: false, business: false, surmesure: true },
+];
+
+const extras = [
+	{
+		title: 'Création de logo / Charte graphique',
+		description: 'Une identité visuelle cohérente et professionnelle pour votre marque.',
+	},
+	{
+		title: 'Rédaction de contenu SEO',
+		description: 'Des textes optimisés pour Google qui convertissent vos visiteurs en clients.',
+	},
+	{
+		title: 'Maintenance mensuelle évolutive',
+		description: 'Mises à jour, modifications et suivi de performance en continu.',
+	},
+];
+
+const faqs = [
+	{
+		question: 'Pourquoi Astro et pas WordPress ?',
+		answer: 'Astro génère des sites statiques ultra-rapides, sans base de données ni plugins qui cassent. Le résultat : un score Lighthouse de 100/100, une sécurité renforcée (aucune faille PHP/SQL) et zéro maintenance serveur. Votre site charge en moins d\'une seconde.',
+	},
+	{
+		question: 'Le site m\'appartient-il ?',
+		answer: 'Oui, à 100%. Le code source complet vous est livré sur un dépôt GitHub à votre nom. Vous êtes propriétaire de chaque ligne de code, chaque image et chaque contenu. Aucun verrouillage.',
+	},
+	{
+		question: 'Comment se passe l\'hébergement ?',
+		answer: 'Votre site est hébergé gratuitement sur Netlify, un service professionnel utilisé par des millions de sites. Pour les petits sites, c\'est 100% gratuit — zéro frais mensuels. Le déploiement est automatique à chaque modification.',
+	},
+	{
+		question: 'Quels sont les délais de livraison ?',
+		answer: 'Le Pack Vitrine est livré en 1 à 2 semaines. Le Pack Business en 3 à 4 semaines. Le Pack Sur-Mesure dépend de la complexité du projet — nous définissons ensemble un calendrier réaliste dès le départ.',
+	},
+];
+---
+
+<Layout seo={seo}>
+	<Container>
+		<!-- Header -->
+		<section class="pricing-header">
+			<h1>Des tarifs clairs, aucun frais caché</h1>
+			<p>Hébergement gratuit sur Netlify, maintenance simplifiée, code source livré. Concentrez-vous sur votre activité, on s'occupe du reste.</p>
+		</section>
+
+		<!-- Pricing Cards -->
+		<section class="pricing-cards">
+			{plans.map((plan) => (
+				<div class:list={['pricing-card', { 'pricing-card--featured': plan.featured }]}>
+					{plan.badge && <span class="pricing-badge">{plan.badge}</span>}
+					<h3 class="pricing-card__name">{plan.name}</h3>
+					<p class="pricing-card__target">{plan.target}</p>
+					<div class="pricing-card__price">
+						{plan.price ? (
+							<>
+								<span class="pricing-card__amount">{plan.price}€</span>
+								<span class="pricing-card__period">unique</span>
+							</>
+						) : (
+							<span class="pricing-card__amount pricing-card__amount--devis">Sur Devis</span>
+						)}
+					</div>
+					<ul class="pricing-card__features">
+						{plan.features.map((f) => (
+							<li>{f}</li>
+						))}
+					</ul>
+					<Button href="/company/contact">{plan.cta}</Button>
+				</div>
+			))}
+		</section>
+
+		<!-- Comparison Table -->
+		<section class="comparison-section">
+			<div class="section-header">
+				<h2>Comparatif détaillé</h2>
+				<p>Toutes les fonctionnalités incluses selon votre pack.</p>
+			</div>
+			<div class="comparison-table-wrapper">
+				<table class="comparison-table">
+					<thead>
+						<tr>
+							<th>Fonctionnalité</th>
+							<th>Vitrine</th>
+							<th class="comparison-table__featured">Business</th>
+							<th>Sur-Mesure</th>
+						</tr>
+					</thead>
+					<tbody>
+						{comparison.map((row) => (
+							<tr>
+								<td>{row.label}</td>
+								<td>{row.vitrine ? '✓' : '—'}</td>
+								<td class="comparison-table__featured">{row.business ? '✓' : '—'}</td>
+								<td>{row.surmesure ? '✓' : '—'}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- Extras -->
+		<section class="extras-section">
+			<div class="section-header">
+				<h2>Services à la carte</h2>
+				<p>Des options complémentaires pour aller plus loin.</p>
+			</div>
+			<div class="extras-grid">
+				{extras.map((extra) => (
+					<div class="extra-card">
+						<h3>{extra.title}</h3>
+						<p>{extra.description}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- FAQ -->
+		<section class="faq-section">
+			<div class="section-header">
+				<h2>Questions fréquentes</h2>
+				<p>Tout ce que vous devez savoir avant de vous lancer.</p>
+			</div>
+			<div class="faq-list">
+				{faqs.map((faq) => (
+					<details class="faq-item">
+						<summary>{faq.question}</summary>
+						<p>{faq.answer}</p>
+					</details>
+				))}
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section class="cta-section">
+			<div class="cta-card">
+				<h2>Un projet en tête ?</h2>
+				<p>Discutons-en et trouvons la formule qui vous convient. Devis gratuit sous 48h.</p>
+				<div class="cta-btns">
+					<Button href="/company/contact">Demander un devis gratuit</Button>
+				</div>
+			</div>
+		</section>
+	</Container>
+</Layout>
+
+<style>
+	/* Header */
+	.pricing-header {
+		text-align: center;
+		max-width: 640px;
+		margin: 3rem auto;
+	}
+	.pricing-header h1 {
+		margin-bottom: 1rem;
+	}
+	.pricing-header p {
+		opacity: 0.8;
+		line-height: 1.6;
+	}
+
+	/* Pricing Cards */
+	.pricing-cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		margin: 0 auto var(--section-margin);
+		max-width: 1100px;
+	}
+	.pricing-card {
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		position: relative;
+	}
+	.pricing-card--featured {
+		background: var(--theme-surface-2);
+		color: var(--theme-on-surface-2);
+		transform: scale(1.05);
+		box-shadow: 0 8px 32px rgba(108, 92, 231, 0.25);
+	}
+	.pricing-badge {
+		position: absolute;
+		top: -0.75rem;
+		background: var(--theme-primary);
+		color: var(--theme-on-primary);
+		font-size: 0.8rem;
+		font-weight: 600;
+		padding: 0.25rem 1rem;
+		border-radius: 2rem;
+	}
+	.pricing-card__name {
+		font-size: var(--font-size-md);
+		margin-bottom: 0.25rem;
+	}
+	.pricing-card__target {
+		opacity: 0.7;
+		font-size: 0.9rem;
+		margin-bottom: 1.5rem;
+	}
+	.pricing-card__price {
+		margin-bottom: 1.5rem;
+	}
+	.pricing-card__amount {
+		font-size: var(--font-size-xl);
+		font-weight: 700;
+		line-height: 1;
+	}
+	.pricing-card__amount--devis {
+		font-size: var(--font-size-lg);
+	}
+	.pricing-card__period {
+		display: block;
+		font-size: 0.85rem;
+		opacity: 0.6;
+		margin-top: 0.25rem;
+	}
+	.pricing-card__features {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 2rem;
+		width: 100%;
+		text-align: left;
+	}
+	.pricing-card__features li {
+		padding: 0.5rem 0;
+		padding-left: 1.5rem;
+		position: relative;
+		font-size: 0.95rem;
+		border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+	}
+	.pricing-card__features li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		color: var(--theme-primary);
+		font-weight: 700;
+	}
+	.pricing-card--featured .pricing-card__features li::before {
+		color: #a29bfe;
+	}
+	.pricing-card--featured .pricing-card__features li {
+		border-bottom-color: rgba(255, 255, 255, 0.1);
+	}
+
+	@media (max-width: 768px) {
+		.pricing-cards {
+			grid-template-columns: 1fr;
+			max-width: 400px;
+		}
+		.pricing-card--featured {
+			transform: none;
+		}
+	}
+
+	/* Section header */
+	.section-header {
+		text-align: center;
+		max-width: 600px;
+		margin: 0 auto 2.5rem;
+	}
+	.section-header h2 {
+		margin-bottom: 0.75rem;
+	}
+	.section-header p {
+		opacity: 0.8;
+		line-height: 1.6;
+	}
+
+	/* Comparison Table */
+	.comparison-section {
+		margin: var(--section-margin) auto;
+	}
+	.comparison-table-wrapper {
+		overflow-x: auto;
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+	}
+	.comparison-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.95rem;
+	}
+	.comparison-table th,
+	.comparison-table td {
+		padding: 0.85rem 1.25rem;
+		text-align: center;
+	}
+	.comparison-table th:first-child,
+	.comparison-table td:first-child {
+		text-align: left;
+	}
+	.comparison-table thead th {
+		font-weight: 600;
+		border-bottom: 2px solid rgba(128, 128, 128, 0.15);
+	}
+	.comparison-table tbody tr {
+		border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+	}
+	.comparison-table tbody tr:last-child {
+		border-bottom: none;
+	}
+	.comparison-table__featured {
+		background: rgba(108, 92, 231, 0.06);
+	}
+
+	/* Extras */
+	.extras-section {
+		margin: var(--section-margin) auto;
+	}
+	.extras-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--theme-grid-gap);
+	}
+	.extra-card {
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		padding: 2rem;
+	}
+	.extra-card h3 {
+		font-size: 1.1rem;
+		margin-bottom: 0.5rem;
+	}
+	.extra-card p {
+		opacity: 0.8;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		margin: 0;
+	}
+	@media (max-width: 768px) {
+		.extras-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	/* FAQ */
+	.faq-section {
+		margin: var(--section-margin) auto;
+		max-width: 800px;
+	}
+	.faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.faq-item {
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		overflow: hidden;
+	}
+	.faq-item summary {
+		padding: 1.25rem 1.5rem;
+		font-weight: 600;
+		cursor: pointer;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+	.faq-item summary::after {
+		content: '+';
+		font-size: 1.4rem;
+		font-weight: 300;
+		color: var(--theme-primary);
+		flex-shrink: 0;
+		transition: transform 0.2s ease;
+	}
+	.faq-item[open] summary::after {
+		content: '−';
+	}
+	.faq-item p {
+		padding: 0 1.5rem 1.25rem;
+		margin: 0;
+		opacity: 0.8;
+		line-height: 1.7;
+		font-size: 0.95rem;
+	}
+
+	/* CTA */
+	.cta-section {
+		margin: var(--section-margin) auto;
+	}
+	.cta-card {
+		background: var(--theme-surface-2);
+		color: var(--theme-on-surface-2);
+		border-radius: var(--theme-shape-radius);
+		padding: 4rem 2rem;
+		text-align: center;
+	}
+	.cta-card h2 {
+		margin-bottom: 1rem;
+	}
+	.cta-card p {
+		opacity: 0.85;
+		max-width: 500px;
+		margin: 0 auto 2rem;
+		line-height: 1.6;
+	}
+	.cta-btns {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+</style>

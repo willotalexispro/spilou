@@ -48,7 +48,7 @@ export const footerLists = [
 			},
 			{
 				title: 'Tarifs',
-				slug: '/#tarifs',
+				slug: '/tarifs',
 			},
 			{
 				title: 'Contact',

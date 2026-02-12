@@ -13,7 +13,7 @@ export const nav = [
 	},
 	{
 		title: 'Tarifs',
-		slug: '/#tarifs',
+		slug: '/tarifs',
 	},
 	{
 		title: 'Blog',
