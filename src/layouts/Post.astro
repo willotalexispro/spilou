@@ -1,9 +1,18 @@
 ---
 import { Container } from '@components/odyssey-theme';
-import Layout from './Page.astro'; 
+import Layout from './Page.astro';
 import { generateTagData } from '../utils/helpers';
+import Breadcrumbs from '@components/blog/Breadcrumbs.astro';
+import TableOfContents from '@components/blog/TableOfContents.astro';
+import ShareButtons from '@components/blog/ShareButtons.astro';
+import AuthorBox from '@components/blog/AuthorBox.astro';
+import { defaultAuthor } from '../config/authors';
+import settings from '../config/settings';
 
-const {content: {title, description, publishDate, canonicalURL, featuredImage, tags} } = Astro.props;
+const {content: {title, description, publishDate, canonicalURL, featuredImage, tags, author}, headings} = Astro.props;
+
+const authorId = author || defaultAuthor;
+const canonicalUrl = canonicalURL || `${settings.url}${Astro.url.pathname}`;
 
 let allTagsData = [];
 
@@ -14,13 +23,15 @@ if(tags && tags.length > 0){
 const seo = {
 	title,
 	description,
-  publishDate,
+	publishDate,
 	canonicalURL,
 	image: featuredImage,
+	type: 'article' as const,
 };
 ---
-<Layout seo={seo}> 
-  <div class="post-header__container"> 
+<Layout seo={seo}>
+  <Breadcrumbs title={title} />
+  <div class="post-header__container">
     <ul class="post-tags__list">
       {allTagsData.map(tag => (
         <li class="post-tags__tag">
@@ -36,9 +47,12 @@ const seo = {
     </p>
     {featuredImage && <img class="post-layout__img" src={featuredImage} alt={title} />}
   </div>
+  <TableOfContents headings={headings} />
   <article id="article">
       <slot></slot>
   </article>
+  <ShareButtons url={canonicalUrl} title={title} />
+  <AuthorBox authorId={authorId} />
 </Layout>
 
 <style>

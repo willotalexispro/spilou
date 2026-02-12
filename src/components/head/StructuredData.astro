@@ -1,0 +1,130 @@
+---
+import settings from '../../config/settings.js';
+
+export interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	type?: 'website' | 'blog' | 'article' | 'service';
+	publishDate?: string;
+}
+
+const {
+	title = settings.title,
+	description = settings.description,
+	image,
+	type,
+	publishDate,
+} = Astro.props;
+
+const siteUrl = settings.url;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || siteUrl).href;
+const imageUrl = image ? new URL(image, Astro.site || siteUrl).href : `${siteUrl}/social.png`;
+
+// Organization — present on all pages
+const organization = {
+	'@type': 'Organization',
+	name: settings.name,
+	url: siteUrl,
+	logo: `${siteUrl}/favicon.svg`,
+	description: settings.description,
+};
+
+// Build schemas array
+const schemas: Record<string, unknown>[] = [
+	{
+		'@context': 'https://schema.org',
+		...organization,
+	},
+];
+
+if (type === 'website') {
+	schemas.push({
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: settings.name,
+		url: siteUrl,
+		description: settings.description,
+	});
+	schemas.push({
+		'@context': 'https://schema.org',
+		'@type': 'LocalBusiness',
+		name: settings.name,
+		url: siteUrl,
+		description: settings.description,
+		priceRange: '€€',
+		serviceType: ['Création de sites web', 'Refonte de site', 'Optimisation SEO'],
+	});
+} else if (type === 'article') {
+	schemas.push({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: title,
+		description,
+		image: imageUrl,
+		url: canonicalURL,
+		datePublished: publishDate,
+		author: {
+			'@type': 'Organization',
+			name: settings.name,
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: settings.name,
+			logo: {
+				'@type': 'ImageObject',
+				url: `${siteUrl}/favicon.svg`,
+			},
+		},
+	});
+} else if (type === 'blog') {
+	schemas.push({
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: title,
+		description,
+		url: canonicalURL,
+		publisher: {
+			'@type': 'Organization',
+			name: settings.name,
+		},
+	});
+} else if (type === 'service') {
+	schemas.push({
+		'@context': 'https://schema.org',
+		'@type': 'Service',
+		name: 'Création de sites web',
+		provider: organization,
+		url: canonicalURL,
+		description,
+		offers: [
+			{
+				'@type': 'Offer',
+				name: 'Pack Vitrine',
+				price: '990',
+				priceCurrency: 'EUR',
+				description: 'Site One-page, SEO local optimisé, formulaire de contact, hébergement inclus.',
+			},
+			{
+				'@type': 'Offer',
+				name: 'Pack Business',
+				price: '1890',
+				priceCurrency: 'EUR',
+				description: "Jusqu'à 10 pages, blog, optimisation conversion, hébergement inclus.",
+			},
+		],
+	});
+} else {
+	schemas.push({
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: title,
+		description,
+		url: canonicalURL,
+	});
+}
+---
+
+{schemas.map((schema) => (
+	<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

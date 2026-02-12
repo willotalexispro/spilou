@@ -1,0 +1,61 @@
+---
+import { authors, defaultAuthor } from '../../config/authors';
+
+const { authorId } = Astro.props;
+const author = authors[authorId] || authors[defaultAuthor];
+---
+
+<div class="author-box">
+	<img class="author-box__avatar" src={author.avatar} alt={author.name} width="64" height="64" />
+	<div class="author-box__info">
+		<p class="author-box__name">
+			{author.url ? (
+				<a href={author.url}>{author.name}</a>
+			) : (
+				author.name
+			)}
+		</p>
+		<p class="author-box__bio">{author.bio}</p>
+	</div>
+</div>
+
+<style>
+	.author-box {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		max-width: var(--theme-blog-post-header-width);
+		margin: 0 auto 3rem;
+		padding: 1.5rem 2rem;
+		background: var(--theme-surface-1);
+		border-radius: var(--theme-shape-radius);
+	}
+	.author-box__avatar {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		object-fit: cover;
+		flex-shrink: 0;
+	}
+	.author-box__info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+	.author-box__name {
+		font-weight: 600;
+		margin: 0;
+	}
+	.author-box__name a {
+		color: var(--theme-primary);
+		text-decoration: none;
+	}
+	.author-box__name a:hover {
+		text-decoration: underline;
+	}
+	.author-box__bio {
+		margin: 0;
+		font-size: 0.9rem;
+		opacity: 0.8;
+	}
+</style>

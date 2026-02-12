@@ -1,0 +1,102 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const { url, title } = Astro.props;
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+---
+
+<div class="share-buttons">
+	<span class="share-buttons__label">Partager :</span>
+	<a
+		class="share-btn"
+		href={`https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`}
+		target="_blank"
+		rel="noopener noreferrer"
+		aria-label="Partager sur X"
+	>
+		<Icon name="mdi:twitter" width="20" height="20" />
+	</a>
+	<a
+		class="share-btn"
+		href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
+		target="_blank"
+		rel="noopener noreferrer"
+		aria-label="Partager sur LinkedIn"
+	>
+		<Icon name="mdi:linkedin" width="20" height="20" />
+	</a>
+	<a
+		class="share-btn"
+		href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+		target="_blank"
+		rel="noopener noreferrer"
+		aria-label="Partager sur Facebook"
+	>
+		<Icon name="mdi:facebook" width="20" height="20" />
+	</a>
+	<button
+		class="share-btn"
+		id="copy-link-btn"
+		aria-label="Copier le lien"
+		data-url={url}
+	>
+		<Icon name="mdi:content-copy" width="20" height="20" />
+	</button>
+</div>
+
+<script>
+	const btn = document.getElementById('copy-link-btn');
+	if (btn) {
+		btn.addEventListener('click', async () => {
+			const url = btn.getAttribute('data-url');
+			if (url) {
+				await navigator.clipboard.writeText(url);
+				btn.setAttribute('aria-label', 'Lien copié !');
+				btn.classList.add('share-btn--copied');
+				setTimeout(() => {
+					btn.setAttribute('aria-label', 'Copier le lien');
+					btn.classList.remove('share-btn--copied');
+				}, 2000);
+			}
+		});
+	}
+</script>
+
+<style>
+	.share-buttons {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		max-width: var(--theme-blog-post-header-width);
+		margin: 0 auto 1.5rem;
+		padding: 0 2rem;
+	}
+	.share-buttons__label {
+		font-size: 0.9rem;
+		font-weight: 600;
+		opacity: 0.8;
+	}
+	.share-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: var(--theme-surface-1);
+		color: var(--theme-on-surface-1);
+		border: none;
+		cursor: pointer;
+		transition: background var(--theme-transition), color var(--theme-transition);
+		text-decoration: none;
+	}
+	.share-btn:hover {
+		background: var(--theme-primary);
+		color: var(--theme-on-primary);
+	}
+	.share-btn--copied {
+		background: #27ae60;
+		color: #fff;
+	}
+</style>

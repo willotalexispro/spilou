@@ -1,0 +1,51 @@
+---
+const { headings = [] } = Astro.props;
+const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const show = filtered.length >= 2;
+---
+
+{show && (
+	<nav class="toc" aria-label="Sommaire">
+		<p class="toc__title">Sommaire</p>
+		<ul class="toc__list">
+			{filtered.map((h) => (
+				<li class:list={['toc__item', { 'toc__item--h3': h.depth === 3 }]}>
+					<a href={`#${h.slug}`}>{h.text}</a>
+				</li>
+			))}
+		</ul>
+	</nav>
+)}
+
+<style>
+	.toc {
+		max-width: var(--theme-blog-post-header-width);
+		margin: 0 auto 2rem;
+		padding: 1.5rem 2rem;
+		background: var(--theme-surface-1);
+		border-radius: var(--theme-shape-radius);
+	}
+	.toc__title {
+		font-weight: 600;
+		margin: 0 0 0.75rem;
+	}
+	.toc__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+	.toc__item a {
+		text-decoration: none;
+		color: var(--theme-on-surface-1);
+		font-size: 0.95rem;
+	}
+	.toc__item a:hover {
+		color: var(--theme-primary);
+	}
+	.toc__item--h3 {
+		padding-left: 1.25rem;
+	}
+</style>

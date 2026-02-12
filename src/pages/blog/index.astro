@@ -27,8 +27,9 @@ const posts = await Astro.glob('./posts/*.mdx').then(posts =>
 );
 
 const seo = {
-	title: 'Blog | Spilou',
-	description: 'Page du blog Spilou',
+	title: 'Blog | Spilou — Conseils web et SEO pour professionnels',
+	description: 'Découvrez nos articles sur la création de sites web, le SEO et les bonnes pratiques pour améliorer votre présence en ligne.',
+	type: 'blog' as const,
 };
 ---
 
