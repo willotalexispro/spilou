@@ -1,0 +1,34 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	id?: string;
+}
+
+const { title, description, id } = Astro.props;
+---
+
+<section class="services-section" id={id}
+	<SectionHeader title={title} description={description} />
+	<div class="services-grid">
+		<slot />
+	</div>
+</section>
+
+<style>
+	.services-section {
+		margin: var(--section-margin) auto;
+	}
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--theme-grid-gap);
+	}
+	@media (max-width: 768px) {
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,6 +1,9 @@
 ---
 import { Container, Button } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
+import SectionHeader from '../components/sections/SectionHeader.astro';
+import FaqSection from '../components/sections/FaqSection.astro';
+import CtaSection from '../components/sections/CtaSection.astro';
 
 const seo = {
 	title: 'Tarifs | Spilou — Création de sites web performants',
@@ -142,10 +145,10 @@ const faqs = [
 
 		<!-- Comparison Table -->
 		<section class="comparison-section">
-			<div class="section-header">
-				<h2>Comparatif détaillé</h2>
-				<p>Toutes les fonctionnalités incluses selon votre pack.</p>
-			</div>
+			<SectionHeader
+				title="Comparatif détaillé"
+				description="Toutes les fonctionnalités incluses selon votre pack."
+			/>
 			<div class="comparison-table-wrapper">
 				<table class="comparison-table">
 					<thead>
@@ -172,10 +175,10 @@ const faqs = [
 
 		<!-- Extras -->
 		<section class="extras-section">
-			<div class="section-header">
-				<h2>Services à la carte</h2>
-				<p>Des options complémentaires pour aller plus loin.</p>
-			</div>
+			<SectionHeader
+				title="Services à la carte"
+				description="Des options complémentaires pour aller plus loin."
+			/>
 			<div class="extras-grid">
 				{extras.map((extra) => (
 					<div class="extra-card">
@@ -187,31 +190,19 @@ const faqs = [
 		</section>
 
 		<!-- FAQ -->
-		<section class="faq-section">
-			<div class="section-header">
-				<h2>Questions fréquentes</h2>
-				<p>Tout ce que vous devez savoir avant de vous lancer.</p>
-			</div>
-			<div class="faq-list">
-				{faqs.map((faq) => (
-					<details class="faq-item">
-						<summary>{faq.question}</summary>
-						<p>{faq.answer}</p>
-					</details>
-				))}
-			</div>
-		</section>
+		<FaqSection
+			title="Questions fréquentes"
+			description="Tout ce que vous devez savoir avant de vous lancer."
+			faqs={faqs}
+		/>
 
 		<!-- CTA -->
-		<section class="cta-section">
-			<div class="cta-card">
-				<h2>Un projet en tête ?</h2>
-				<p>Discutons-en et trouvons la formule qui vous convient. Devis gratuit sous 48h.</p>
-				<div class="cta-btns">
-					<Button href="/company/contact">Demander un devis gratuit</Button>
-				</div>
-			</div>
-		</section>
+		<CtaSection
+			title="Un projet en tête ?"
+			description="Discutons-en et trouvons la formule qui vous convient. Devis gratuit sous 48h."
+			buttonText="Demander un devis gratuit"
+			buttonHref="/company/contact"
+		/>
 	</Container>
 </Layout>
 
@@ -322,25 +313,30 @@ const faqs = [
 	@media (max-width: 768px) {
 		.pricing-cards {
 			grid-template-columns: 1fr;
-			max-width: 400px;
+			max-width: 500px;
 		}
 		.pricing-card--featured {
 			transform: none;
 		}
+		.extras-grid {
+			grid-template-columns: 1fr;
+		}
 	}
-
-	/* Section header */
-	.section-header {
-		text-align: center;
-		max-width: 600px;
-		margin: 0 auto 2.5rem;
-	}
-	.section-header h2 {
-		margin-bottom: 0.75rem;
-	}
-	.section-header p {
-		opacity: 0.8;
-		line-height: 1.6;
+	@media (max-width: 480px) {
+		.pricing-cards {
+			max-width: 100%;
+		}
+		.pricing-card {
+			padding: 1.5rem;
+		}
+		.comparison-table th,
+		.comparison-table td {
+			padding: 0.6rem 0.5rem;
+			font-size: 0.85rem;
+		}
+		.extra-card {
+			padding: 1.5rem;
+		}
 	}
 
 	/* Comparison Table */
@@ -405,85 +401,5 @@ const faqs = [
 		font-size: 0.95rem;
 		line-height: 1.6;
 		margin: 0;
-	}
-	@media (max-width: 768px) {
-		.extras-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-
-	/* FAQ */
-	.faq-section {
-		margin: var(--section-margin) auto;
-		max-width: 800px;
-	}
-	.faq-list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-	.faq-item {
-		background: var(--theme-bg);
-		border-radius: var(--theme-shape-radius);
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-		overflow: hidden;
-	}
-	.faq-item summary {
-		padding: 1.25rem 1.5rem;
-		font-weight: 600;
-		cursor: pointer;
-		list-style: none;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-	}
-	.faq-item summary::-webkit-details-marker {
-		display: none;
-	}
-	.faq-item summary::after {
-		content: '+';
-		font-size: 1.4rem;
-		font-weight: 300;
-		color: var(--theme-primary);
-		flex-shrink: 0;
-		transition: transform 0.2s ease;
-	}
-	.faq-item[open] summary::after {
-		content: '−';
-	}
-	.faq-item p {
-		padding: 0 1.5rem 1.25rem;
-		margin: 0;
-		opacity: 0.8;
-		line-height: 1.7;
-		font-size: 0.95rem;
-	}
-
-	/* CTA */
-	.cta-section {
-		margin: var(--section-margin) auto;
-	}
-	.cta-card {
-		background: var(--theme-surface-2);
-		color: var(--theme-on-surface-2);
-		border-radius: var(--theme-shape-radius);
-		padding: 4rem 2rem;
-		text-align: center;
-	}
-	.cta-card h2 {
-		margin-bottom: 1rem;
-	}
-	.cta-card p {
-		opacity: 0.85;
-		max-width: 500px;
-		margin: 0 auto 2rem;
-		line-height: 1.6;
-	}
-	.cta-btns {
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-		flex-wrap: wrap;
 	}
 </style>

@@ -1,0 +1,33 @@
+---
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div class="section-header">
+	<h2>{title}</h2>
+	<p>{description}</p>
+</div>
+
+<style>
+	.section-header {
+		text-align: center;
+		max-width: 600px;
+		margin: 0 auto 3rem;
+	}
+	.section-header h2 {
+		margin-bottom: 0.75rem;
+	}
+	.section-header p {
+		opacity: 0.8;
+		line-height: 1.6;
+	}
+	@media (max-width: 480px) {
+		.section-header {
+			margin-bottom: 2rem;
+		}
+	}
+</style>

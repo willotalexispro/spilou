@@ -1,0 +1,81 @@
+---
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	faqs: { question: string; answer: string }[];
+}
+
+const { title, description, faqs } = Astro.props;
+---
+
+<section class="faq-section">
+	<SectionHeader title={title} description={description} />
+	<div class="faq-list">
+		{faqs.map((faq) => (
+			<details class="faq-item">
+				<summary>{faq.question}</summary>
+				<p>{faq.answer}</p>
+			</details>
+		))}
+	</div>
+</section>
+
+<style>
+	.faq-section {
+		margin: var(--section-margin) auto;
+		max-width: 800px;
+	}
+	.faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.faq-item {
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+		overflow: hidden;
+	}
+	.faq-item summary {
+		padding: 1.25rem 1.5rem;
+		font-weight: 600;
+		cursor: pointer;
+		list-style: none;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+	.faq-item summary::after {
+		content: '+';
+		font-size: 1.4rem;
+		font-weight: 300;
+		color: var(--theme-primary);
+		flex-shrink: 0;
+		transition: transform 0.2s ease;
+	}
+	.faq-item[open] summary::after {
+		content: '\2212';
+	}
+	.faq-item p {
+		padding: 0 1.5rem 1.25rem;
+		margin: 0;
+		opacity: 0.8;
+		line-height: 1.7;
+		font-size: 0.95rem;
+	}
+	@media (max-width: 480px) {
+		.faq-item summary {
+			padding: 1rem;
+			font-size: 0.95rem;
+		}
+		.faq-item p {
+			padding: 0 1rem 1rem;
+		}
+	}
+</style>

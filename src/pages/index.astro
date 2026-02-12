@@ -1,10 +1,37 @@
 ---
-import { Container, Button } from '@components/odyssey-theme';
+import { Container } from '@components/odyssey-theme';
 import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
 import LighthouseScore from '../components/sections/LighthouseScore.astro';
 import ServiceCard from '../components/sections/ServiceCard.astro';
 import ProcessSection from '../components/sections/ProcessSection.astro';
+import SectionHeader from '../components/sections/SectionHeader.astro';
+import FaqSection from '../components/sections/FaqSection.astro';
+import CtaSection from '../components/sections/CtaSection.astro';
+import ServicesGrid from '../components/sections/ServicesGrid.astro';
+
+const faqs = [
+	{
+		question: 'Pourquoi choisir Spilou pour créer votre site internet ?',
+		answer: "Un site bien conçu doit incarner votre identité de marque, répondre aux attentes de vos utilisateurs et être pensé pour le référencement naturel dès les premières lignes de code. Chez Spilou, chaque projet est le fruit d'une réflexion stratégique mêlant design, technique et visibilité : arborescence optimisée, UX/UI sur mesure, responsive design, SEO intégré et performance maximale.",
+	},
+	{
+		question: 'Pourquoi Astro et pas WordPress ?',
+		answer: "Astro génère des sites statiques ultra-rapides, sans base de données ni plugins qui cassent. Le résultat : un score Lighthouse de 100/100, une sécurité renforcée (aucune faille PHP/SQL), zéro maintenance serveur et un temps de chargement inférieur à une seconde. Votre site est plus rapide, plus sûr et mieux référencé que 95% des sites WordPress.",
+	},
+	{
+		question: 'Comment se déroule un projet avec Spilou ?',
+		answer: "De la définition de votre besoin à la mise en ligne, nous restons à vos côtés. Audit, stratégie, design UX/UI et développement : tout est réalisé sur mesure. Nous intégrons le SEO dès la conception — choix des mots-clés, structure de contenu, temps de chargement optimisés, compatibilité mobile et gestion technique propre.",
+	},
+	{
+		question: 'Le site m\'appartient-il à 100% ?',
+		answer: "Oui, totalement. Le code source complet vous est livré sur un dépôt GitHub à votre nom. Vous êtes propriétaire de chaque ligne de code, chaque image et chaque contenu. Aucun abonnement caché, aucun verrouillage — vous êtes libre de faire évoluer votre site comme vous le souhaitez.",
+	},
+	{
+		question: "Combien coûte l'hébergement ?",
+		answer: "Zéro. Votre site est hébergé gratuitement sur Netlify, un service professionnel utilisé par des millions de sites. Pour les sites vitrines et business, c'est 100% gratuit — pas de frais mensuels, pas de surprise. Le déploiement est automatique à chaque modification.",
+	},
+];
 ---
 
 <Layout seo={{ type: 'website' }}>
@@ -13,10 +40,10 @@ import ProcessSection from '../components/sections/ProcessSection.astro';
 	<!-- Preuve de Performance -->
 	<Container>
 		<section class="lighthouse-section" id="realisations">
-			<div class="section-header">
-				<h2>Des performances qui font la différence</h2>
-				<p>Chaque site que nous livrons atteint le score maximal sur Google Lighthouse. Vitesse, accessibilité et SEO au sommet.</p>
-			</div>
+			<SectionHeader
+				title="Des performances qui font la différence"
+				description="Chaque site que nous livrons atteint le score maximal sur Google Lighthouse. Vitesse, accessibilité et SEO au sommet."
+			/>
 			<div class="lighthouse-grid">
 				<LighthouseScore label="Performance" score={100} />
 				<LighthouseScore label="Accessibilité" score={100} />
@@ -27,102 +54,61 @@ import ProcessSection from '../components/sections/ProcessSection.astro';
 
 	<!-- Grille des Services -->
 	<Container>
-		<section class="services-section" id="services">
-			<div class="section-header">
-				<h2>Nos services</h2>
-				<p>Des solutions adaptées à chaque étape de votre présence en ligne.</p>
-			</div>
-			<div class="services-grid">
-				<ServiceCard
-					icon="ic:baseline-web"
-					title="Sites vitrines"
-					description="Un site sur-mesure qui reflète votre image de marque. Design moderne, responsive et optimisé pour convertir vos visiteurs en clients."
-				/>
-				<ServiceCard
-					icon="ic:baseline-refresh"
-					title="Refonte de site"
-					description="Votre site actuel est lent ou daté ? Nous le transformons en une plateforme performante avec un design actuel et un code optimisé."
-				/>
-				<ServiceCard
-					icon="ic:baseline-trending-up"
-					title="Optimisation SEO"
-					description="Améliorez votre visibilité sur Google. Audit technique, optimisation du contenu et stratégie de mots-clés pour attirer plus de clients."
-				/>
-			</div>
-		</section>
+		<ServicesGrid
+			id="services"
+			title="Nos services"
+			description="Des solutions adaptées à chaque étape de votre présence en ligne."
+		>
+			<ServiceCard
+				icon="ic:baseline-web"
+				title="Sites vitrines"
+				description="Un site sur-mesure qui reflète votre image de marque. Design moderne, responsive et optimisé pour convertir vos visiteurs en clients."
+			/>
+			<ServiceCard
+				icon="ic:baseline-refresh"
+				title="Refonte de site"
+				description="Votre site actuel est lent ou daté ? Nous le transformons en une plateforme performante avec un design actuel et un code optimisé."
+			/>
+			<ServiceCard
+				icon="ic:baseline-trending-up"
+				title="Optimisation SEO"
+				description="Améliorez votre visibilité sur Google. Audit technique, optimisation du contenu et stratégie de mots-clés pour attirer plus de clients."
+			/>
+		</ServicesGrid>
 	</Container>
 
 	<!-- Section Processus -->
 	<section class="process-section" id="process">
 		<Container>
-			<div class="section-header">
-				<h2>Notre process</h2>
-				<p>Un accompagnement en 3 étapes pour un site livré dans les règles de l'art.</p>
-			</div>
+			<SectionHeader
+				title="Notre process"
+				description="Un accompagnement en 3 étapes pour un site livré dans les règles de l'art."
+			/>
 			<ProcessSection />
 		</Container>
 	</section>
 
 	<!-- FAQ -->
 	<Container>
-		<section class="faq-section">
-			<div class="section-header">
-				<h2>Pourquoi choisir Spilou ?</h2>
-				<p>Les réponses aux questions que vous vous posez avant de lancer votre projet.</p>
-			</div>
-			<div class="faq-list">
-				<details class="faq-item">
-					<summary>Pourquoi choisir Spilou pour créer votre site internet ?</summary>
-					<p>Un site bien conçu doit incarner votre identité de marque, répondre aux attentes de vos utilisateurs et être pensé pour le référencement naturel dès les premières lignes de code. Chez Spilou, chaque projet est le fruit d'une réflexion stratégique mêlant design, technique et visibilité : arborescence optimisée, UX/UI sur mesure, responsive design, SEO intégré et performance maximale.</p>
-				</details>
-				<details class="faq-item">
-					<summary>Pourquoi Astro et pas WordPress ?</summary>
-					<p>Astro génère des sites statiques ultra-rapides, sans base de données ni plugins qui cassent. Le résultat : un score Lighthouse de 100/100, une sécurité renforcée (aucune faille PHP/SQL), zéro maintenance serveur et un temps de chargement inférieur à une seconde. Votre site est plus rapide, plus sûr et mieux référencé que 95% des sites WordPress.</p>
-				</details>
-				<details class="faq-item">
-					<summary>Comment se déroule un projet avec Spilou ?</summary>
-					<p>De la définition de votre besoin à la mise en ligne, nous restons à vos côtés. Audit, stratégie, design UX/UI et développement : tout est réalisé sur mesure. Nous intégrons le SEO dès la conception — choix des mots-clés, structure de contenu, temps de chargement optimisés, compatibilité mobile et gestion technique propre.</p>
-				</details>
-				<details class="faq-item">
-					<summary>Le site m'appartient-il à 100% ?</summary>
-					<p>Oui, totalement. Le code source complet vous est livré sur un dépôt GitHub à votre nom. Vous êtes propriétaire de chaque ligne de code, chaque image et chaque contenu. Aucun abonnement caché, aucun verrouillage — vous êtes libre de faire évoluer votre site comme vous le souhaitez.</p>
-				</details>
-				<details class="faq-item">
-					<summary>Combien coûte l'hébergement ?</summary>
-					<p>Zéro. Votre site est hébergé gratuitement sur Netlify, un service professionnel utilisé par des millions de sites. Pour les sites vitrines et business, c'est 100% gratuit — pas de frais mensuels, pas de surprise. Le déploiement est automatique à chaque modification.</p>
-				</details>
-			</div>
-		</section>
+		<FaqSection
+			title="Pourquoi choisir Spilou ?"
+			description="Les réponses aux questions que vous vous posez avant de lancer votre projet."
+			faqs={faqs}
+		/>
 	</Container>
 
 	<!-- Section Tarifs / CTA -->
 	<Container>
-		<section class="cta-section" id="tarifs">
-			<div class="cta-card">
-				<h2>Prêt à lancer votre projet ?</h2>
-				<p>Discutons de votre projet et obtenez un devis gratuit sous 48h. Pas d'engagement, pas de surprise.</p>
-				<div class="cta-btns">
-					<Button href="/company/contact">Demander un devis gratuit</Button>
-				</div>
-			</div>
-		</section>
+		<CtaSection
+			title="Prêt à lancer votre projet ?"
+			description="Discutons de votre projet et obtenez un devis gratuit sous 48h. Pas d'engagement, pas de surprise."
+			buttonText="Demander un devis gratuit"
+			buttonHref="/company/contact"
+		/>
 	</Container>
 </Layout>
 
 <style>
-	.section-header {
-		text-align: center;
-		max-width: 600px;
-		margin: 0 auto 3rem;
-	}
-	.section-header h2 {
-		margin-bottom: 0.75rem;
-	}
-	.section-header p {
-		opacity: 0.8;
-		line-height: 1.6;
-	}
-
 	/* Lighthouse */
 	.lighthouse-section {
 		margin: var(--section-margin) auto;
@@ -142,100 +128,10 @@ import ProcessSection from '../components/sections/ProcessSection.astro';
 		}
 	}
 
-	/* Services */
-	.services-section {
-		margin: var(--section-margin) auto;
-	}
-	.services-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--theme-grid-gap);
-	}
-	@media (max-width: 768px) {
-		.services-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-
 	/* Process */
 	.process-section {
 		margin: var(--section-margin) 0;
 		padding: 3rem 0;
 		background: var(--theme-surface-1);
-	}
-
-	/* FAQ */
-	.faq-section {
-		margin: var(--section-margin) auto;
-		max-width: 800px;
-	}
-	.faq-list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-	.faq-item {
-		background: var(--theme-bg);
-		border-radius: var(--theme-shape-radius);
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-		overflow: hidden;
-	}
-	.faq-item summary {
-		padding: 1.25rem 1.5rem;
-		font-weight: 600;
-		cursor: pointer;
-		list-style: none;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-	}
-	.faq-item summary::-webkit-details-marker {
-		display: none;
-	}
-	.faq-item summary::after {
-		content: '+';
-		font-size: 1.4rem;
-		font-weight: 300;
-		color: var(--theme-primary);
-		flex-shrink: 0;
-		transition: transform 0.2s ease;
-	}
-	.faq-item[open] summary::after {
-		content: '\2212';
-	}
-	.faq-item p {
-		padding: 0 1.5rem 1.25rem;
-		margin: 0;
-		opacity: 0.8;
-		line-height: 1.7;
-		font-size: 0.95rem;
-	}
-
-	/* CTA */
-	.cta-section {
-		margin: var(--section-margin) auto;
-	}
-	.cta-card {
-		background: var(--theme-surface-2);
-		color: var(--theme-on-surface-2);
-		border-radius: var(--theme-shape-radius);
-		padding: 4rem 2rem;
-		text-align: center;
-	}
-	.cta-card h2 {
-		margin-bottom: 1rem;
-	}
-	.cta-card p {
-		opacity: 0.85;
-		max-width: 500px;
-		margin: 0 auto 2rem;
-		line-height: 1.6;
-	}
-	.cta-btns {
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-		flex-wrap: wrap;
 	}
 </style>

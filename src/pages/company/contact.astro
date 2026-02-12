@@ -140,10 +140,26 @@ const seo = {
 		.contact-hero__section {
 			grid-template-columns: 1fr;
 			min-height: auto;
+			gap: 1.5rem;
 		}
 		.contact-hero__text-section,
 		.contact-form__container {
 			padding: 1.5rem;
+		}
+	}
+	@media (max-width: 480px) {
+		.contact-hero__text-section,
+		.contact-form__container {
+			padding: 1rem;
+		}
+		.contact-hero__section {
+			gap: 1rem;
+		}
+		.contact-hero__text-section > p {
+			margin-bottom: 1.25rem;
+		}
+		.contact-info {
+			margin-bottom: 1.25rem;
 		}
 	}
 </style>

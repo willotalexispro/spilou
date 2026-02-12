@@ -1,0 +1,55 @@
+---
+import { Button } from '@components/odyssey-theme';
+
+interface Props {
+	title: string;
+	description: string;
+	buttonText: string;
+	buttonHref: string;
+}
+
+const { title, description, buttonText, buttonHref } = Astro.props;
+---
+
+<section class="cta-section">
+	<div class="cta-card">
+		<h2>{title}</h2>
+		<p>{description}</p>
+		<div class="cta-btns">
+			<Button href={buttonHref}>{buttonText}</Button>
+		</div>
+	</div>
+</section>
+
+<style>
+	.cta-section {
+		margin: var(--section-margin) auto;
+	}
+	.cta-card {
+		background: var(--theme-surface-2);
+		color: var(--theme-on-surface-2);
+		border-radius: var(--theme-shape-radius);
+		padding: 4rem 2rem;
+		text-align: center;
+	}
+	.cta-card h2 {
+		margin-bottom: 1rem;
+	}
+	.cta-card p {
+		opacity: 0.85;
+		max-width: 500px;
+		margin: 0 auto 2rem;
+		line-height: 1.6;
+	}
+	.cta-btns {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+	@media (max-width: 480px) {
+		.cta-card {
+			padding: 2.5rem 1.25rem;
+		}
+	}
+</style>
