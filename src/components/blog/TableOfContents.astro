@@ -25,6 +25,12 @@ const show = filtered.length >= 2;
 		background: var(--theme-surface-1);
 		border-radius: var(--theme-shape-radius);
 	}
+	@media (max-width: 600px) {
+		.toc {
+			padding: 1.25rem;
+			border-radius: 0;
+		}
+	}
 	.toc__title {
 		font-weight: 600;
 		margin: 0 0 0.75rem;

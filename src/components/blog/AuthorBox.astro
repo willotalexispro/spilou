@@ -30,6 +30,12 @@ const author = authors[authorId] || authors[defaultAuthor];
 		background: var(--theme-surface-1);
 		border-radius: var(--theme-shape-radius);
 	}
+	@media (max-width: 600px) {
+		.author-box {
+			padding: 1.25rem;
+			border-radius: 0;
+		}
+	}
 	.author-box__avatar {
 		width: 64px;
 		height: 64px;
