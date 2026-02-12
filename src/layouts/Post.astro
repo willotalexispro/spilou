@@ -30,27 +30,29 @@ const seo = {
 };
 ---
 <Layout seo={seo}>
-  <Breadcrumbs title={title} />
   <div class="post-header__container">
-    <ul class="post-tags__list">
-      {allTagsData.map(tag => (
-        <li class="post-tags__tag">
-          <a href={`/blog/tags/${tag.slug}`}>
-            {tag.title}
-          </a>
-        </li>
-      ))}
-    </ul>
     <h1>{title}</h1>
     <p class="post-layout__date">
       <time><em>{publishDate}</em></time>
     </p>
     {featuredImage && <img class="post-layout__img" src={featuredImage} alt={title} />}
   </div>
+  <Breadcrumbs title={title} />
   <TableOfContents headings={headings} />
   <article id="article">
       <slot></slot>
   </article>
+  {allTagsData.length > 0 && (
+    <div class="post-tags__container">
+      <div class="post-tags__list">
+        {allTagsData.map(tag => (
+          <a class="post-tags__tag" href={`/blog/tags/${tag.slug}`}>
+            {tag.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
   <ShareButtons url={canonicalUrl} title={title} />
   <AuthorBox authorId={authorId} />
 </Layout>
@@ -72,17 +74,34 @@ const seo = {
     border-radius: var(--theme-shape-radius);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   }
+  .post-tags__container {
+    max-width: var(--theme-blog-post-header-width);
+    margin: 0 auto 1.5rem;
+    padding: 0 2rem;
+  }
   .post-tags__list {
-    margin: 1rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
   .post-tags__tag {
+    font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
-  }
-  .post-tags__tag a {
-    font-size: var(--font-size-sm);
+    letter-spacing: 0.03em;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--theme-button-border-radius);
+    background: var(--theme-surface-1);
+    color: var(--theme-primary);
     text-decoration: none;
+    transition: background var(--theme-transition), color var(--theme-transition);
+  }
+  .post-tags__tag:hover {
+    background: var(--theme-primary);
+    color: var(--theme-on-primary);
   }
   .post-layout__img {
     margin: 0 auto 1rem auto;

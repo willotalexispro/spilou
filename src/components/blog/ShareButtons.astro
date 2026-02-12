@@ -45,22 +45,26 @@ const encodedTitle = encodeURIComponent(title);
 	</button>
 </div>
 
-<script>
-	const btn = document.getElementById('copy-link-btn');
-	if (btn) {
-		btn.addEventListener('click', async () => {
-			const url = btn.getAttribute('data-url');
-			if (url) {
-				await navigator.clipboard.writeText(url);
+<script is:inline>
+	function initCopyButton() {
+		var btn = document.getElementById('copy-link-btn');
+		if (!btn || btn.dataset.bound) return;
+		btn.dataset.bound = 'true';
+		btn.addEventListener('click', function () {
+			var url = btn.getAttribute('data-url');
+			if (!url) return;
+			navigator.clipboard.writeText(url).then(function () {
 				btn.setAttribute('aria-label', 'Lien copié !');
 				btn.classList.add('share-btn--copied');
-				setTimeout(() => {
+				setTimeout(function () {
 					btn.setAttribute('aria-label', 'Copier le lien');
 					btn.classList.remove('share-btn--copied');
 				}, 2000);
-			}
+			});
 		});
 	}
+	initCopyButton();
+	document.addEventListener('astro:page-load', initCopyButton);
 </script>
 
 <style>

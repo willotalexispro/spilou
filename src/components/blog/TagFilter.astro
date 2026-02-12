@@ -1,0 +1,77 @@
+---
+const { tags = [] } = Astro.props;
+---
+
+<nav class="tag-filter" aria-label="Filtrer par tag">
+	<button class="tag-filter__btn tag-filter__btn--active" data-tag="all">Tous</button>
+	{tags.map((tag) => (
+		<button class="tag-filter__btn" data-tag={tag}>{tag}</button>
+	))}
+</nav>
+
+<script is:inline>
+	function initTagFilter() {
+		var nav = document.querySelector('.tag-filter');
+		if (!nav || nav.dataset.bound) return;
+		nav.dataset.bound = 'true';
+
+		nav.addEventListener('click', function (e) {
+			var btn = e.target.closest('.tag-filter__btn');
+			if (!btn) return;
+
+			var tag = btn.getAttribute('data-tag');
+
+			// Update active button
+			nav.querySelectorAll('.tag-filter__btn').forEach(function (b) {
+				b.classList.remove('tag-filter__btn--active');
+			});
+			btn.classList.add('tag-filter__btn--active');
+
+			// Filter posts
+			var posts = document.querySelectorAll('[data-tags]');
+			posts.forEach(function (post) {
+				if (tag === 'all') {
+					post.style.display = '';
+				} else {
+					var postTags = post.getAttribute('data-tags').split(',');
+					post.style.display = postTags.indexOf(tag) !== -1 ? '' : 'none';
+				}
+			});
+		});
+	}
+	initTagFilter();
+	document.addEventListener('astro:page-load', initTagFilter);
+</script>
+
+<style>
+	.tag-filter {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 2rem;
+	}
+	.tag-filter__btn {
+		padding: 0.5rem 1.25rem;
+		border: 2px solid var(--theme-surface-1);
+		border-radius: var(--theme-button-border-radius);
+		background: transparent;
+		color: var(--theme-on-bg);
+		font-family: inherit;
+		font-size: 0.9rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: background var(--theme-transition), color var(--theme-transition), border-color var(--theme-transition);
+	}
+	.tag-filter__btn:hover {
+		border-color: var(--theme-primary);
+		color: var(--theme-primary);
+	}
+	.tag-filter__btn--active {
+		background: var(--theme-primary);
+		border-color: var(--theme-primary);
+		color: var(--theme-on-primary);
+	}
+	.tag-filter__btn--active:hover {
+		color: var(--theme-on-primary);
+	}
+</style>
