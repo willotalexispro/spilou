@@ -56,6 +56,7 @@ const { seo } = Astro.props;
 					backgroundColor: '#fafafa',
 					threshold: 0.99,
 					edgeSharpness: 100.0,
+					parallaxFactor: 0.5,
 				};
 
 				var currentAnimationId = null;
@@ -94,12 +95,14 @@ const { seo } = Astro.props;
 						height
 					);
 
+					var effectiveHeight = (pageHeight - height) * cfg.parallaxFactor + height;
+
 					var metaballs = [];
 					for (var i = 0; i < cfg.count; i++) {
 						var radius = Math.random() * (cfg.radiusMax - cfg.radiusMin) + cfg.radiusMin;
 						metaballs.push({
 							x: Math.random() * (width - 2 * radius) + radius,
-							y: Math.random() * (pageHeight - 2 * radius) + radius,
+							y: Math.random() * (effectiveHeight - 2 * radius) + radius,
 							vx: (Math.random() - 0.5) * cfg.speed,
 							vy: (Math.random() - 0.5) * cfg.speed,
 							r: radius * cfg.radiusScale
@@ -173,15 +176,15 @@ const { seo } = Astro.props;
 							mb.x += mb.vx;
 							mb.y += mb.vy;
 							if (mb.x < mb.r || mb.x > width - mb.r) mb.vx *= -1;
-							if (mb.y < mb.r || mb.y > pageHeight - mb.r) mb.vy *= -1;
+							if (mb.y < mb.r || mb.y > effectiveHeight - mb.r) mb.vy *= -1;
 						}
 						// Convert from page-space to viewport-space
-						var scrollY = window.scrollY || window.pageYOffset;
+						var scrollY = document.body.scrollTop || window.scrollY || 0;
 						var data = new Float32Array(3 * cfg.count);
 						for (var i = 0; i < cfg.count; i++) {
 							var idx = 3 * i;
 							data[idx] = metaballs[i].x;
-							data[idx + 1] = metaballs[i].y - scrollY;
+							data[idx + 1] = height - (metaballs[i].y - scrollY * cfg.parallaxFactor);
 							data[idx + 2] = metaballs[i].r;
 						}
 						gl.uniform3fv(metaballsLoc, data);
